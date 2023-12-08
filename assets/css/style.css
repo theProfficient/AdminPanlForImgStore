@@ -1,51 +1,4 @@
-/*========	Table of Css Content ==========*/
-/* Typography */
-/* Normalize  */
-/* Global style */
-/* Breadcrumb Area Start */
-/* Header Area Start */
-/* Footer Area Start */
-/* Hero Area Start */
-/* Features Area Start */
-/* Featured Game Area Start */
-/* Whay Choose us Area Start */
-/* activities Area Start */
-/* Fun fact Area Start */
-/* Get Start Area Start */
-/*  Recent Winners Area Start */
-/*	Index 2 Css Start */
-/* About Area Start */
-/* About page section Area Start */
-/* Our Vision Area Start */
-/* Team Area Start */
-/* community and Blog Area Start */
-/* Play Games Area Start */
-/* Lottery Staticstics Area Start */
-/*  How it Work Area Start  */
-/* lottery video Area Start */
-/* Questions Area Start */
-/* Cart Area Start */
-/* Payment-method Area Start */
-/* Tournaments Area Start */
-/* Bonuses Area Start */
-/*Deposit Bonuses Area Start */
-/* Bonus banner Area Start */
-/* Awards Area Start */
-/*  How Play Area Start */
-/*  Affiliate Process area Start */
-/* Features Area Start */
-/* Ref Commission Area Start  */
-/* Marketing Tools Area Start */
-/*Testimonial Area CSS Start*/
-/* Serch Area Start */
-/* Help Section Area Start */
-/* Contact Area Start */
-/* 404 Area Start */
-/* faq-section css start */
-/* login modal Area Start */
-/* =========================
-=============================
- */
+
 /* Typography */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Ubuntu:300,400,500,700");
 /* Normalize  */
@@ -94,7 +47,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #FFF;
+  color: #ffffff;
   font-family: "Ubuntu", sans-serif;
 }
 
@@ -108,7 +61,7 @@ p {
 }
 
 a {
-  color: #FFF;
+  color: #ffffff;
   text-decoration: none;
 }
 
@@ -152,7 +105,7 @@ select:focus {
   outline: none;
   -webkit-box-shadow: none;
           box-shadow: none;
-  border: 1px solid #ddd;
+  border: 1px solid #dddddd;
 }
 
 /**
@@ -586,7 +539,7 @@ select:focus {
   font-size: 14px;
   text-align: center;
   border-radius: 50%;
-  color: #fff;
+  color: #ffffff;
   cursor: pointer;
   -webkit-transform: rotate(-90deg);
           transform: rotate(-90deg);
@@ -731,7 +684,7 @@ select:focus {
   font-weight: 700;
   margin-bottom: 11px;
   text-transform: uppercase;
-  color: #fff;
+  color: #ffffff;
 }
 .breadcrumb-area .title.extra-padding {
   margin-bottom: 26px;
@@ -741,13 +694,13 @@ select:focus {
 }
 .breadcrumb-area .breadcrumb-list li span {
   margin: 0px 7px;
-  color: #fff;
+  color: #ffffff;
 }
 .breadcrumb-area .breadcrumb-list li a {
   font-size: 16px;
   -webkit-transition: all 0.3s ease-in;
   transition: all 0.3s ease-in;
-  color: #fff;
+  color: #ffffff;
 }
 .breadcrumb-area .breadcrumb-list li a:hover {
   color: #f1f1f1;
@@ -4512,7 +4465,9 @@ select:focus {
 }
 .contact .contact-form-wrapper {
   padding-right: 65px;
+  background-color: rgb(231, 231, 87);
 }
+
 .contact .contact-form-wrapper .contact-box {
   position: relative;
   z-index: 9;
@@ -4930,3 +4885,58 @@ select:focus {
 }
 
 /* login modal Area End */
+
+.parentContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.formContainer {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.createTournamentsTitle {
+  text-align: center;
+}
+
+.inputContainer {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.loginButton {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.loginButton:hover {
+  background-color: #0056b3;
+}
+
+.error {
+  color: red;
+}
+
+.showDataStyles {
+  /* Styles for showing data */
+}
