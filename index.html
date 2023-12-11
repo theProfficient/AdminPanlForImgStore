@@ -132,11 +132,12 @@
                                 <select class="input-field" name="container" required>
                                     <!-- Options will be dynamically added here -->
                                 </select>
-                                <button type="button" class="mybtn1" id="fetchContainers">Fetch Containers</button>
+                                <button type="button" class="mybtn1" id="fetchContainers" style="width: 120px; height: 40px; font-size: 10px; text-align:center; background: #1ed6d6;">Containers</button>
+
                             </div>
                             <input type="file" class="input-field" name="images" required
                                 placeholder="SELECT IMAGES" multiple>
-                            <button type="submit" class="mybtn1">Upload</button>
+                            <button type="submit" class="mybtn1" style="width: 120px; height: 40px; font-size: 10px; text-align:center;background: #1ed6d6;">Upload</button>
                         </form>
                         </div>
                     </div>
@@ -161,39 +162,86 @@
     <script src="assets/js/TweenMax.js"></script>
     <script src="assets/js/mousemoveparallax.js"></script>
     <!-- main -->
-   
+    <!---------------------log in script---------------------------------------->
     <script>
-        $(document).ready(function () {
-            // Function to fetch and populate container names
-            function fetchContainerNames() {
-                $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
-                    var containerSelect = $('select[name="container"]');
-                    containerSelect.empty(); // Clear existing options
-                    $.each(data, function (index, value) {
-                        containerSelect.append($('<option>', {
-                            value: value,
-                            text: value
-                        }));
-                    });
-                });
+        document.addEventListener("DOMContentLoaded", function () {
+            // Check if the user is logged in
+            var isLoggedIn = localStorage.getItem('isLoggedIn');
+    
+            if (!isLoggedIn) {
+                // If not logged in, redirect to the login page
+                window.location.href = 'loginPage.html';
             }
-
-            // Fetch container names on button click
-            $('#fetchContainers').on('click', function () {
-                fetchContainerNames();
-            });
-
-            // Fetch container names initially
-            fetchContainerNames();
-
-
-            document.getElementById("myForm").addEventListener("submit", function () {
-                setTimeout(function () {
-                    document.getElementById("myForm").reset();
-                }, 1000);
-            });
         });
     </script>
+    
+  <!-- Update the script section in the <body> -->
+<script>
+    $(document).ready(function () {
+        // Function to fetch and populate container names
+        function fetchContainerNames() {
+            $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
+                var containerSelect = $('select[name="container"]');
+                containerSelect.empty(); // Clear existing options
+                $.each(data, function (index, value) {
+                    containerSelect.append($('<option>', {
+                        value: value,
+                        text: value
+                    }));
+                });
+
+                console.log("Containers names fetched:", data);
+            });
+        }
+
+        // Fetch container names on button click
+        $('#fetchContainers').on('click', function () {
+            fetchContainerNames();
+        });
+
+        // Fetch container names initially
+        fetchContainerNames();
+
+        // Handle form submission
+        $("#myForm").submit(function (e) {
+            e.preventDefault();
+
+            // Get the selected container name
+            var containerName = $('select[name="container"]').val();
+
+            // Create a FormData object to handle file uploads
+            var formData = new FormData($(this)[0]);
+
+            // Append the selected container name to the FormData
+            formData.append('containerName', containerName);
+
+            // Make a POST request to the API endpoint
+            $.ajax({
+                type: "POST",
+                url: "https://imagestoreazure.azurewebsites.net/api/uploadImages/" + containerName,
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    console.log("Files uploaded successfully:", response);
+                    window.alert("successfully uploaded")
+                    // Add any additional logic you need after successful upload
+                },
+                error: function (error) {
+                    console.error("Error uploading files:", error);
+                    // Add error handling logic here
+                }
+            });
+        });
+
+        document.getElementById("myForm").addEventListener("submit", function () {
+            setTimeout(function () {
+                document.getElementById("myForm").reset();
+            }, 1000);
+        });
+    });
+</script>
+
     <script src="assets/js/main.js"></script>
 </body>
 

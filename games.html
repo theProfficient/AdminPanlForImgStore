@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="forntEnd-Developer" content="Mamunur Rashid">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> ImageStore</title>
+    <title>ImageStore</title>
     <!-- favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
     <!-- bootstrap -->
@@ -45,7 +45,7 @@
     </div>
     <!-- preloader area end -->
 
-    <!-- Header Area Start  -->
+    <!-- Header Area Start -->
     <header class="header">
         <!-- Top Header Area Start -->
         <section class="top-header">
@@ -60,6 +60,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
         </section>
         <!-- Top Header Area End -->
         <!--Main-Menu Area Start-->
@@ -79,6 +80,13 @@
                                 <div class="collapse navbar-collapse justify-content-end fixed-height"
                                     id="main_menu">
                                     <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link" href="index.html" role="button"
+                                                aria-haspopup="true" aria-expanded="false">
+                                                Home
+                                                <div class="mr-hover-effect"></div>
+                                            </a>
+                                        </li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link" href="index.html" role="button" aria-haspopup="true"
                                                 aria-expanded="false">
@@ -103,15 +111,11 @@
         </div>
         <!--Main-Menu Area Start-->
     </header>
-    <!-- Header Area End  -->
+    <!-- Header Area End -->
 
     <!-- Contact Area End -->
     <section class="contact" style="background-color: rgb(231, 231, 87);">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 col-md-10">
-                </div>
-            </div>
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="contact-form-wrapper">
@@ -119,13 +123,14 @@
                             <h4 class="title">
                                 Delete Image
                             </h4>
-                            <!-- <form id="myForm" action="https://formspree.io/f/xwkddkrr" method="POST" onsubmit="submitForm(event)"> -->
-                            <input type="text" class="input-field" name="text" required
-                                placeholder="SELECT CONTAINER">
-                            <input type="email" class="input-field" name="email" required
-                                placeholder="SELECT IMAGES">
-                            <!-- <textarea class="input-field textarea" name="message" required placeholder="Message *"></textarea> -->
-                            <button type="submit" class="mybtn1">Delete</button>
+                            <form id="deleteContainerForm">
+                                <div>
+                                    <select class="input-field" name="container" required>
+                                        <!-- Options will be dynamically added here -->
+                                    </select>
+                                    <button type="submit" class="mybtn1"
+                                        style="width: 120px; height: 40px; font-size: 10px; text-align:center; background: #1ed6d6;">Delete</button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -136,27 +141,80 @@
     <!-- Contact Area End -->
 
     <!-- jquery -->
-    <script
-        src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script
-        src="assets/js/jquery.js"></script>
+    <script src="assets/js/jquery.js"></script>
     <!-- popper -->
     <script src="assets/js/popper.min.js"></script>
     <!-- bootstrap -->
     <script src="assets/js/bootstrap.min.js"></script>
     <!-- plugin js-->
     <script src="assets/js/plugin.js"></script>
-
-    <!-- MpusemoverParallax JS-->
-    <script src="assets/js/TweenMax.js"></script>
-    <script src="assets/js/mousemoveparallax.js"></script>
-    <!-- main -->
+    <!----------------log in ----------------->
     <script>
-        document.getElementById("myForm").addEventListener("submit", function () {
-            setTimeout(function () {
-                document.getElementById("myForm").reset();
-            }, 1000);
+        document.addEventListener("DOMContentLoaded", function () {
+            // Check if the user is logged in
+            var isLoggedIn = localStorage.getItem('isLoggedIn');
+    
+            if (!isLoggedIn) {
+                // If not logged in, redirect to the login page
+                window.location.href = 'loginPage.html';
+            }
         });
     </script>
+    
+
+    <!-- Update the script section in the <body> -->
+    <script>
+        $(document).ready(function () {
+            // Function to fetch and populate container names
+            function fetchContainerNames() {
+                $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
+                    var containerSelect = $('select[name="container"]');
+                    containerSelect.empty(); // Clear existing options
+                    $.each(data, function (index, value) {
+                        containerSelect.append($('<option>', {
+                            value: value,
+                            text: value
+                        }));
+                    });
+
+                    console.log("Containers names fetched:", data);
+                });
+            }
+
+            // Fetch container names initially
+            fetchContainerNames();
+
+            // Handle form submission
+            $("#deleteContainerForm").submit(function (e) {
+                e.preventDefault();
+
+                // Get the selected container name
+                var containerName = $('select[name="container"]').val();
+
+                // Make a DELETE request to the API endpoint to delete the entire container
+                $.ajax({
+                    type: "DELETE",
+                    url: "https://imagestoreazure.azurewebsites.net/api/deleteAllImages/" + containerName,
+                    success: function (response) {
+                        console.log("Container deleted successfully:", response);
+                        window.alert("successfully deleted")
+                        // Add any additional logic you need after successful deletion
+                    },
+                    error: function (error) {
+                        console.error("Error deleting container:", error);
+                        // Add error handling logic here
+                    }
+                });
+            });
+
+            document.getElementById("deleteContainerForm").addEventListener("submit", function () {
+                setTimeout(function () {
+                    document.getElementById("deleteContainerForm").reset();
+                }, 1000);
+            });
+        });
+    </script>
+
     <script src="assets/js/main.js"></script>
 </body>
 
