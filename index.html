@@ -223,7 +223,7 @@
     $(document).ready(function () {
         // Function to create a container
         function createContainer(containerName) {
-            $.post("http://localhost:3001/createContainerByAdmin?containerName=" + containerName)
+            $.post("https://imagestoreazure.azurewebsites.net/createContainerByAdmin?containerName=" + containerName)
                 .done(function (data) {
                     console.log("Container created successfully:", data);
                     alert("Container created successfully: " + containerName);
@@ -252,7 +252,7 @@
         $(document).ready(function () {
             // Function to fetch and populate container names
             function fetchContainerNames() {
-                $.get("http://localhost:3001/getAllContainerNames", function (data) {
+                $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
                     var containerSelect = $('select[name="container"]');
                     containerSelect.empty(); 
                     $.each(data, function (index, value) {
@@ -290,7 +290,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url:"http://localhost:3001/api/uploadImages?containerName=" + containerName + "&price=" + price,
+                    url:"https://imagestoreazure.azurewebsites.net/api/uploadImages?containerName=" + containerName + "&price=" + price,
                     data: formData,
                     processData: false,
                     contentType: false,

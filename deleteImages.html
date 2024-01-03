@@ -199,7 +199,7 @@
             function deleteContainer(containerName) {
                 $.ajax({
                     type: "DELETE",
-                    url: "http://localhost:3001/deleteContainerByAdmin?containerName=" + containerName,
+                    url: "https://imagestoreazure.azurewebsites.net/deleteContainerByAdmin?containerName=" + containerName,
                     success: function (data) {
                         console.log("Container deleted successfully:", data);
                         alert("Container deleted successfully: " + containerName);
@@ -216,7 +216,7 @@
 
             // Function to fetch and populate container names
             function fetchContainerNames() {
-                $.get("http://localhost:3001/getAllContainerNames", function (data) {
+                $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
                     var containerSelect = $('select[name="container"]');
                     containerSelect.empty(); // Clear existing options
                     $.each(data, function (index, value) {
@@ -255,7 +255,7 @@
                 // Make a DELETE request to the new API endpoint to delete the entire container
                 $.ajax({
                     type: "DELETE",
-                    url: "http://localhost:3001/deleteAllImages/" + containerName,
+                    url: "https://imagestoreazure.azurewebsites.net/deleteAllImages/" + containerName,
                     success: function (response) {
                         console.log("Container deleted successfully:", response);
                         window.alert("Container images successfully deleted");
