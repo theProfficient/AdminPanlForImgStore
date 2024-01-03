@@ -19,18 +19,25 @@
     <!-- responsive -->
     <link rel="stylesheet" href="assets/css/responsive.css">
     <style>
+        .contact-box {
+            margin-left: 40px;
+            margin-right: 60px;
+            /* margin-bottom: 10px; */
+            margin-top: 70px;
+        }
+    
         .contact {
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
+            margin-bottom: 50px; 
         }
-
+    
         .contact-form-wrapper {
             background-color: white;
             padding: 20px;
             border-radius: 8px;
-            margin-top: 50px; /* Adjust this value as needed */
         }
     </style>
 </head>
@@ -118,11 +125,31 @@
     <section class="contact" style="background-color: rgb(231, 231, 87);">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-6">
+                <div class="col-lg-6" style="width:1000px;">
                     <div class="contact-form-wrapper">
+
+                        <div class="row">
+
+    <!------------------delete Container Box -------------->
+                    
+                      <div class="col-md-6">
+                        <div class="contact-box">
+                            <h4 class="title"> Delete Container</h4>
+                            <div>
+                                <input type="text" class="input-field" id="deleteContainerName"
+                                    placeholder="Enter Container Name" required>
+                                <button type="button" class="mybtn1" id="deleteContainerBtn"
+                                    style="width: 120px; height: 40px; font-size: 10px; text-align:center; background: #1ed6d6;">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+        <!------------------ delete all Images of container ------------------->
+                        <div class="col-md-6">
                         <div class="contact-box">
                             <h4 class="title">
-                                Delete Image
+                                Delete Images
                             </h4>
                             <form id="deleteContainerForm">
                                 <div>
@@ -141,15 +168,18 @@
     </section>
     <!-- Contact Area End -->
 
-    <!-- jquery -->
-    <script src="assets/js/jquery.js"></script>
-    <!-- popper -->
-    <script src="assets/js/popper.min.js"></script>
-    <!-- bootstrap -->
-    <script src="assets/js/bootstrap.min.js"></script>
-    <!-- plugin js-->
-    <script src="assets/js/plugin.js"></script>
-    <!----------------log in ----------------->
+     <!-- Your existing script imports here -->
+     <script src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+     <script src="assets/js/jquery.js"></script>
+     <script src="assets/js/popper.min.js"></script>
+     <script src="assets/js/bootstrap.min.js"></script>
+     <script src="assets/js/plugin.js"></script>
+     <script src="assets/js/TweenMax.js"></script>
+     <script src="assets/js/mousemoveparallax.js"></script>
+     <script src="assets/js/main.js"></script>
+
+
+    <!-------------------------log in ---------------------->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Check if the user is logged in
@@ -161,14 +191,32 @@
             }
         });
     </script>
-    
 
-    <!-- Update the script section in the <body> -->
-    <script>
+    <!---------------------- delete container -------->
+       <script>
         $(document).ready(function () {
+            // Function to delete a container
+            function deleteContainer(containerName) {
+                $.ajax({
+                    type: "DELETE",
+                    url: "http://localhost:3001/deleteContainerByAdmin?containerName=" + containerName,
+                    success: function (data) {
+                        console.log("Container deleted successfully:", data);
+                        alert("Container deleted successfully: " + containerName);
+
+                        // After deletion, fetch and update container names
+                        fetchContainerNames();
+                    },
+                    error: function (error) {
+                        console.error("Error deleting container:", error.responseJSON.error);
+                        alert("Error deleting container: " + error.responseJSON.error);
+                    }
+                });
+            }
+
             // Function to fetch and populate container names
             function fetchContainerNames() {
-                $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
+                $.get("http://localhost:3001/getAllContainerNames", function (data) {
                     var containerSelect = $('select[name="container"]');
                     containerSelect.empty(); // Clear existing options
                     $.each(data, function (index, value) {
@@ -182,6 +230,18 @@
                 });
             }
 
+            // Event listener for the delete Container button
+            $('#deleteContainerBtn').on('click', function () {
+                var containerName = $('#deleteContainerName').val().trim();
+
+                if (containerName === "") {
+                    alert("Please enter container name.");
+                } else {
+                    // Call the new API to delete the container
+                    deleteContainer(containerName);
+                }
+            });
+
             // Fetch container names initially
             fetchContainerNames();
 
@@ -192,17 +252,17 @@
                 // Get the selected container name
                 var containerName = $('select[name="container"]').val();
 
-                // Make a DELETE request to the API endpoint to delete the entire container
+                // Make a DELETE request to the new API endpoint to delete the entire container
                 $.ajax({
                     type: "DELETE",
-                    url: "https://imagestoreazure.azurewebsites.net/api/deleteAllImages/" + containerName,
+                    url: "http://localhost:3001/deleteAllImages/" + containerName,
                     success: function (response) {
                         console.log("Container deleted successfully:", response);
-                        window.alert("successfully deleted")
+                        window.alert("Container images successfully deleted");
                         // Add any additional logic you need after successful deletion
                     },
                     error: function (error) {
-                        console.error("Error deleting container:", error);
+                        console.error("Error deleting container images:", error);
                         // Add error handling logic here
                     }
                 });

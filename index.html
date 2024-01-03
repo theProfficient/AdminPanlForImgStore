@@ -19,20 +19,28 @@
     <!-- responsive -->
     <link rel="stylesheet" href="assets/css/responsive.css">
     <style>
+        .contact-box {
+            margin-left: 40px;
+            margin-right: 60px;
+            /* margin-bottom: 10px; */
+            margin-top: 70px;
+        }
+    
         .contact {
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
+            margin-bottom: 50px; 
         }
-
+    
         .contact-form-wrapper {
             background-color: white;
             padding: 20px;
             border-radius: 8px;
-            margin-top: 50px; /* Adjust this value as needed */
         }
     </style>
+    
 </head>
 
 <body style="background-color: rgb(231, 231, 87);">
@@ -62,7 +70,7 @@
                 </div>
         </section>
         <!-- Top Header Area End -->
-        <!--Main-Menu Area Start-->
+        <!--Main-Menu Area Start-->  
         <div class="mainmenu-area">
             <div class="container">
                 <div class="row">
@@ -72,10 +80,10 @@
                                 <a class="navbar-brand" href="index.html">
                                 </a>
                                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#main_menu" aria-controls="main_menu" aria-expanded="false"
-                                    aria-label="Toggle navigation">
-                                    <span class="navbar-toggler-icon"></span>
-                                </button>
+                                data-bs-target="#main_menu" aria-controls="main_menu" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
                                 <div class="collapse navbar-collapse justify-content-end fixed-height"
                                     id="main_menu">
                                     <ul class="navbar-nav ml-auto">
@@ -113,33 +121,61 @@
     </header>
     <!-- Header Area End -->
 
-    <!-- Contact Area End -->
+ <!-- Contact Area End -->
     <section class="contact" style="background-color: rgb(231, 231, 87);">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-8 col-md-10">
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
+                <div class="col-lg-6" style="width:1000px;">
                     <div class="contact-form-wrapper">
-                        <div class="contact-box">
-                            <h4 class="title">
-                                Upload Image
-                            </h4>
-                            <form id="myForm" action="https://imagestoreazure.azurewebsites.net/api/uploadImages/festival"
-                            method="POST" enctype="multipart/form-data">
-                            <div>
-                                <select class="input-field" name="container" required>
-                                    <!-- Options will be dynamically added here -->
-                                </select>
-                                <button type="button" class="mybtn1" id="fetchContainers" style="width: 120px; height: 40px; font-size: 10px; text-align:center; background: #1ed6d6;">Containers</button>
 
+                        <div class="row">
+                            
+            <!------------------ Create Container Box -->
+                            <div class="col-md-6">
+                                <div class="contact-box">
+                                    <h4 class="title">Create Container</h4>
+                                    <div>
+                                        <input type="text" class="input-field" id="createContainerName"
+                                            placeholder="Enter Container Name" required>
+                                        <button type="button" class="mybtn1" id="createContainerBtn"
+                                            style="width: 120px; height: 40px; font-size: 10px; text-align:center; background: #1ed6d6;">Create</button>
+                                    </div>
+                                </div>
                             </div>
-                            <input type="file" class="input-field" name="images" required
-                                placeholder="SELECT IMAGES" multiple>
-                            <button type="submit" class="mybtn1" style="width: 120px; height: 40px; font-size: 10px; text-align:center;background: #1ed6d6;">Upload</button>
-                        </form>
+                            
+
+           <!------------------ Upload Image Box -->
+                            <div class="col-md-6">
+                                <div class="contact-box">
+                                    <h4 class="title">
+                                        Upload Image
+                                    </h4>
+                                    <form id="myForm" action="https://imagestoreazure.azurewebsites.net/api/uploadImages/festival"
+                                        method="POST" enctype="multipart/form-data">
+                                        <!-- Existing container selection -->
+                                        <div>
+                                            <!-- <label for="container">Select Container:</label> -->
+                                            <select class="input-field" name="container" required>
+                                                <!-- Options will be dynamically added here -->
+                                            </select>
+                                            <button type="button" class="mybtn1" id="fetchContainers"
+                                                style="width: 120px; height: 40px; font-size: 10px; text-align:center; background: #1ed6d6;">Containers</button>
+                                        </div>
+                                        <!-- Existing input for selecting images -->
+                                        <input type="file" class="input-field" name="images" required placeholder="SELECT IMAGES"
+                                            multiple>
+                                        <!-- New input for entering price -->
+                                        <div>
+                                            <!-- <label for="price">Enter Price:</label> -->
+                                            <input type="number" class="input-field" name="price" placeholder="Price"
+                                                required>
+                                        </div>
+                                        <!-- Submit button -->
+                                        <button type="submit" class="mybtn1"
+                                            style="width: 120px; height: 40px; font-size: 10px; text-align:center;background: #1ed6d6;">Upload</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -148,21 +184,16 @@
     </section>
     <!-- Contact Area End -->
 
-    <!-- jquery -->
-    <script
-        src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script
-        src="assets/js/jquery.js"></script>
-    <!-- popper -->
+    <!-- Your existing script imports here -->
+    <script src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="assets/js/jquery.js"></script>
     <script src="assets/js/popper.min.js"></script>
-    <!-- bootstrap -->
     <script src="assets/js/bootstrap.min.js"></script>
-    <!-- plugin js-->
     <script src="assets/js/plugin.js"></script>
-
-    <!-- MpusemoverParallax JS-->
     <script src="assets/js/TweenMax.js"></script>
     <script src="assets/js/mousemoveparallax.js"></script>
-    <!-- main -->
+    <script src="assets/js/main.js"></script>
+
     <!---------------------log in script---------------------------------------->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -174,76 +205,112 @@
                 window.location.href = 'loginPage.html';
             }
         });
-    </script>
+    </script> 
     
-  <!-- Update the script section in the <body> -->
-<script>
-    $(document).ready(function () {
-        // Function to fetch and populate container names
-        function fetchContainerNames() {
-            $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
-                var containerSelect = $('select[name="container"]');
-                containerSelect.empty(); // Clear existing options
-                $.each(data, function (index, value) {
-                    containerSelect.append($('<option>', {
-                        value: value,
-                        text: value
-                    }));
-                });
+  <!----------------- create container by admin -->
 
-                console.log("Containers names fetched:", data);
-            });
+<script>
+    // document.addEventListener("DOMContentLoaded", function () {
+    //     // Check if the user is logged in
+    //     var isLoggedIn = localStorage.getItem('isLoggedIn');
+
+    //     if (!isLoggedIn) {
+    //         // If not logged in, redirect to the login page
+    //         window.location.href = 'loginPage.html';
+    //     }
+    // });
+
+    $(document).ready(function () {
+        // Function to create a container
+        function createContainer(containerName) {
+            $.post("http://localhost:3001/createContainerByAdmin?containerName=" + containerName)
+                .done(function (data) {
+                    console.log("Container created successfully:", data);
+                    alert("Container created successfully: " + containerName);
+                })
+                .fail(function (error) {
+                    console.error("Error creating container:", error.responseJSON.error);
+                    alert("Error creating container: " + error.responseJSON.error);
+                });
         }
 
-        // Fetch container names on button click
-        $('#fetchContainers').on('click', function () {
-            fetchContainerNames();
-        });
+        // Event listener for the Create Container button
+        $('#createContainerBtn').on('click', function () {
+            var containerName = $('#createContainerName').val().trim();
 
-        // Fetch container names initially
-        fetchContainerNames();
-
-        // Handle form submission
-        $("#myForm").submit(function (e) {
-            e.preventDefault();
-
-            // Get the selected container name
-            var containerName = $('select[name="container"]').val();
-
-            // Create a FormData object to handle file uploads
-            var formData = new FormData($(this)[0]);
-
-            // Append the selected container name to the FormData
-            formData.append('containerName', containerName);
-
-            // Make a POST request to the API endpoint
-            $.ajax({
-                type: "POST",
-                url: "https://imagestoreazure.azurewebsites.net/api/uploadImages/" + containerName,
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (response) {
-                    console.log("Files uploaded successfully:", response);
-                    window.alert("successfully uploaded")
-                    // Add any additional logic you need after successful upload
-                },
-                error: function (error) {
-                    console.error("Error uploading files:", error);
-                    // Add error handling logic here
-                }
-            });
-        });
-
-        document.getElementById("myForm").addEventListener("submit", function () {
-            setTimeout(function () {
-                document.getElementById("myForm").reset();
-            }, 1000);
+            if (containerName === "") {
+                alert("Please enter a container name.");
+            } else {
+                createContainer(containerName);
+            }
         });
     });
 </script>
 
-    <script src="assets/js/main.js"></script>
-</body>
+<!-- -------------------Update the script section in the <body> -->
+    <script>
+        $(document).ready(function () {
+            // Function to fetch and populate container names
+            function fetchContainerNames() {
+                $.get("http://localhost:3001/getAllContainerNames", function (data) {
+                    var containerSelect = $('select[name="container"]');
+                    containerSelect.empty(); 
+                    $.each(data, function (index, value) {
+                        containerSelect.append($('<option>', {
+                            value: value,
+                            text: value
+                        }));
+                    });
 
+                    console.log("Containers names fetched:", data);
+                });
+            }
+
+            // Fetch container names on button click
+            $('#fetchContainers').on('click', function () {
+                fetchContainerNames();
+            });
+
+            // Fetch container names initially
+            fetchContainerNames();
+
+            // Handle form submission
+            $("#myForm").submit(function (e) {
+                e.preventDefault();
+
+                // Get the selected container name and price
+                var containerName = $('select[name="container"]').val();
+                var price = $('input[name="price"]').val();
+
+                // Create a FormData object to handle file uploads
+                var formData = new FormData($(this)[0]);
+
+                formData.append('containerName', containerName);
+                formData.append('price', price);
+
+                $.ajax({
+                    type: "POST",
+                    url:"http://localhost:3001/api/uploadImages?containerName=" + containerName + "&price=" + price,
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        console.log("Files uploaded successfully:", response);
+                        window.alert("Successfully uploaded");
+                    },
+                    error: function (error) {
+                        console.error("Error uploading files:", error);
+                        window.alert("Error uploading files");
+                    }
+                });
+            });
+
+            document.getElementById("myForm").addEventListener("submit", function () {
+                setTimeout(function () {
+                    document.getElementById("myForm").reset();
+                }, 1000);
+            });
+        });
+    </script>
+</body>
 </html>
