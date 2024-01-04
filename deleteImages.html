@@ -193,27 +193,42 @@
     </script>
 
     <!---------------------- delete container -------->
-       <script>
+    <script>
+        
         $(document).ready(function () {
-            // Function to delete a container
-            function deleteContainer(containerName) {
-                $.ajax({
-                    type: "DELETE",
-                    url: "https://imagestoreazure.azurewebsites.net/deleteContainerByAdmin?containerName=" + containerName,
-                    success: function (data) {
-                        console.log("Container deleted successfully:", data);
-                        alert("Container deleted successfully: " + containerName);
-
-                        // After deletion, fetch and update container names
-                        fetchContainerNames();
-                    },
-                    error: function (error) {
-                        console.error("Error deleting container:", error.responseJSON.error);
-                        alert("Error deleting container: " + error.responseJSON.error);
-                    }
-                });
+    // Function to delete a container
+    function deleteContainer(containerName) {
+        $.ajax({
+            type: "DELETE",
+            url: "https://imagestoreazure.azurewebsites.net/deleteContainerByAdmin?containerName=" + containerName,
+            success: function (data) {
+                console.log("Container deleted successfully:", data);
+                alert("Container deleted successfully: " + containerName);
+            },
+            error: function (error) {
+                console.error("Error deleting container:", error.responseJSON.error);
+                alert("Error deleting container: " + error.responseJSON.error);
             }
+        });
+    }
 
+    // Event listener for the delete Container button
+    $('#deleteContainerBtn').on('click', function () {
+        var containerName = $('#deleteContainerName').val().trim();
+
+        if (containerName === "") {
+            alert("Please enter container name.");
+        } else {
+            deleteContainer(containerName);
+        }
+    });
+});
+    </script>
+
+
+    <!------------- Update the script section in the <body> -->
+    <script>
+        $(document).ready(function () {
             // Function to fetch and populate container names
             function fetchContainerNames() {
                 $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
@@ -229,19 +244,6 @@
                     console.log("Containers names fetched:", data);
                 });
             }
-
-            // Event listener for the delete Container button
-            $('#deleteContainerBtn').on('click', function () {
-                var containerName = $('#deleteContainerName').val().trim();
-
-                if (containerName === "") {
-                    alert("Please enter container name.");
-                } else {
-                    // Call the new API to delete the container
-                    deleteContainer(containerName);
-                }
-            });
-
             // Fetch container names initially
             fetchContainerNames();
 
@@ -252,13 +254,13 @@
                 // Get the selected container name
                 var containerName = $('select[name="container"]').val();
 
-                // Make a DELETE request to the new API endpoint to delete the entire container
+                // Make a DELETE request to the API endpoint to delete the entire container
                 $.ajax({
                     type: "DELETE",
-                    url: "https://imagestoreazure.azurewebsites.net/deleteAllImages/" + containerName,
+                    url: "https://imagestoreazure.azurewebsites.net/api/deleteAllImages/" + containerName,
                     success: function (response) {
                         console.log("Container deleted successfully:", response);
-                        window.alert("Container images successfully deleted");
+                        window.alert("Container images successfully deleted")
                         // Add any additional logic you need after successful deletion
                     },
                     error: function (error) {
