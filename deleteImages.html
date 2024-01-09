@@ -131,37 +131,37 @@
                         <div class="row">
 
     <!------------------delete Container Box -------------->
-                    
-                      <div class="col-md-6">
-                        <div class="contact-box">
-                            <h4 class="title"> Delete Container</h4>
-                            <div>
-                                <input type="text" class="input-field" id="deleteContainerName"
-                                    placeholder="Enter Container Name" required>
-                                <button type="button" class="mybtn1" id="deleteContainerBtn"
-                                    style="width: 120px; height: 40px; font-size: 10px; text-align:center; background: #1ed6d6;">Delete</button>
-                            </div>
-                        </div>
-                    </div>
+    <div class="col-md-6">
+        <div class="contact-box">
+            <h4 class="title"> Delete Container</h4>
+            <div id="deleteContainerName">
+                <select class="input-field" name="container" required>
+                    <!-- Options will be dynamically added here -->
+                </select>
+                <button type="button" class="mybtn1" id="deleteContainerBtn"
+                    style="width: 120px; height: 40px; font-size: 10px; text-align:center; background: #1ed6d6;">Delete</button>
+            </div>
+        </div>
+    </div>
 
 
         <!------------------ delete all Images of container ------------------->
-                        <div class="col-md-6">
-                        <div class="contact-box">
-                            <h4 class="title">
-                                Delete Images
-                            </h4>
-                            <form id="deleteContainerForm">
-                                <div>
-                                    <select class="input-field" name="container" required>
-                                        <!-- Options will be dynamically added here -->
-                                    </select>
-                                    <button type="submit" class="mybtn1"
-                                        style="width: 120px; height: 40px; font-size: 10px; text-align:center; background: #1ed6d6;">Delete</button>
-                                </div>
-                            </form>
-                        </div>
+        <div class="col-md-6">
+            <div class="contact-box">
+                <h4 class="title">
+                    Delete Images
+                </h4>
+                <form id="deleteContainerForm">
+                    <div>
+                        <select class="input-field" name="container" required>
+                            <!-- Options will be dynamically added here -->
+                        </select>
+                        <button type="submit" class="mybtn1"
+                            style="width: 120px; height: 40px; font-size: 10px; text-align:center; background: #1ed6d6;">Delete</button>
                     </div>
+                </form>
+            </div>
+        </div>
                 </div>
             </div>
         </div>
@@ -194,40 +194,6 @@
 
     <!---------------------- delete container -------->
     <script>
-        
-        $(document).ready(function () {
-    // Function to delete a container
-    function deleteContainer(containerName) {
-        $.ajax({
-            type: "DELETE",
-            url: "https://imagestoreazure.azurewebsites.net/deleteContainerByAdmin?containerName=" + containerName,
-            success: function (data) {
-                console.log("Container deleted successfully:", data);
-                alert("Container deleted successfully: " + containerName);
-            },
-            error: function (error) {
-                console.error("Error deleting container:", error.responseJSON.error);
-                alert("Error deleting container: " + error.responseJSON.error);
-            }
-        });
-    }
-
-    // Event listener for the delete Container button
-    $('#deleteContainerBtn').on('click', function () {
-        var containerName = $('#deleteContainerName').val().trim();
-
-        if (containerName === "") {
-            alert("Please enter container name.");
-        } else {
-            deleteContainer(containerName);
-        }
-    });
-});
-    </script>
-
-
-    <!------------- Update the script section in the <body> -->
-    <script>
         $(document).ready(function () {
             // Function to fetch and populate container names
             function fetchContainerNames() {
@@ -244,23 +210,61 @@
                     console.log("Containers names fetched:", data);
                 });
             }
+
             // Fetch container names initially
             fetchContainerNames();
 
-            // Handle form submission
+            // Event listener for the delete Container button
+            $('#deleteContainerBtn').on('click', function () {
+                var containerName = $('select[name="container"]').val();
+
+                if (containerName === "") {
+                    alert("Please select a container.");
+                } else {
+                    deleteContainer(containerName);
+                }
+            });
+
+            // Function to delete a container
+            function deleteContainer(containerName) {
+                $.ajax({
+                    type: "DELETE",
+                    url: "https://imagestoreazure.azurewebsites.net/deleteContainerByAdmin?containerName=" + containerName,
+                    success: function (response) {
+                        console.log("Container deleted successfully:", response);
+                        window.alert("Container successfully deleted");
+                        // Fetch updated container names after deletion
+                        fetchContainerNames();
+                    },
+                    error: function (error) {
+                        console.error("Error deleting container:", error.responseJSON.error);
+                        alert("Error deleting container: " + error.responseJSON.error);
+                    }
+                });
+            }
+
+            // Handle form submission for deleting images
             $("#deleteContainerForm").submit(function (e) {
                 e.preventDefault();
 
-                // Get the selected container name
+                // Get the selected container name for deleting images
                 var containerName = $('select[name="container"]').val();
 
-                // Make a DELETE request to the API endpoint to delete the entire container
+                if (containerName === "") {
+                    alert("Please select a container.");
+                } else {
+                    deleteAllImages(containerName);
+                }
+            });
+
+            // Function to delete all images of a container
+            function deleteAllImages(containerName) {
                 $.ajax({
                     type: "DELETE",
                     url: "https://imagestoreazure.azurewebsites.net/api/deleteAllImages/" + containerName,
                     success: function (response) {
-                        console.log("Container deleted successfully:", response);
-                        window.alert("Container images successfully deleted")
+                        console.log("Container images deleted successfully:", response);
+                        window.alert("Container images successfully deleted");
                         // Add any additional logic you need after successful deletion
                     },
                     error: function (error) {
@@ -268,7 +272,7 @@
                         // Add error handling logic here
                     }
                 });
-            });
+            }
 
             document.getElementById("deleteContainerForm").addEventListener("submit", function () {
                 setTimeout(function () {
@@ -277,7 +281,6 @@
             });
         });
     </script>
-
     <script src="assets/js/main.js"></script>
 </body>
 
