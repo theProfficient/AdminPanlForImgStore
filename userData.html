@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
         :root {
-            --blue: #007bff;
+            --blue:#252f5a;
             --indigo: #6610f2;
             --purple: #6f42c1;
             --pink: #e83e8c;
@@ -34,7 +34,7 @@
             --white: #fff;
             --gray: #6c757d;
             --gray-dark: #343a40;
-            --primary: #007bff;
+            --primary:#252f5a;
             --secondary: #6c757d;
             --success: #28a745;
             --info: #17a2b8;
@@ -52,24 +52,25 @@
         }
 
         body {
-            font-family: var(--font-family-sans-serif);
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.5;
-            color: #212529;
-            text-align: left;
-            box-sizing: border-box;
-            display: block;
-        }
+    font-family: var(--font-family-sans-serif);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+    box-sizing: border-box;
+    display: block;
+    margin: 0; /* Remove default margin to ensure full-width layout */
+}
 
         /* Apply the provided styles to the header */
         .header {
             -webkit-text-size-adjust: 100%;
             -webkit-tap-highlight-color: transparent;
             font-family: var(--font-family-sans-serif);
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.5;
+            font-size: 1.1rem;
+            font-weight: bold;
+            line-height: 3.5;
             color: #212529;
             text-align: left;
             box-sizing: border-box;
@@ -86,7 +87,7 @@
         }
 
         .navbar-light .navbar-nav .nav-link {
-            color: var(--white);
+            color: #8D9AC0;
         }
 
         #userDataTable {
@@ -97,6 +98,7 @@
         #userDataTable thead {
             background-color: #1ed6d6;
             color: white;
+            
         }
 
         #userDataTable th,
@@ -156,21 +158,21 @@
                                         <li class="nav-item dropdown">
                                             <a class="nav-link" href="index.html" role="button" aria-haspopup="true"
                                                 aria-expanded="false">
-                                                Upload Images
+                                                UPLOAD IMAGES
                                                 <div class="mr-hover-effect"></div>
                                             </a>
                                         </li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link" href="deleteImages.html" role="button" aria-haspopup="true"
                                                 aria-expanded="false">
-                                                Delete Images
+                                                DELETE IMAGES
                                                 <div class="mr-hover-effect"></div>
                                             </a>
                                         </li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link" href="userData.html" role="button" aria-haspopup="true"
                                                 aria-expanded="false">
-                                                User Data
+                                                USER DATA
                                                 <div class="mr-hover-effect"></div>
                                             </a>
                                         </li>
