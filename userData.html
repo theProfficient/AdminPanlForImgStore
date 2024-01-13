@@ -5,19 +5,18 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="forntEnd-Developer" content="Mamunur Rashid">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> User Data</title>
+    <title> Fast Post</title>
     <!-- favicon -->
-    <!-- <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon"> -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
     <!-- bootstrap -->
-    <!-- <link rel="stylesheet" href="assets/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <!-- Plugin css -->
-    <!-- <link rel="stylesheet" href="assets/css//plugin.css"> -->
+    <link rel="stylesheet" href="assets/css//plugin.css">
     <!-- stylesheet -->
     <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
     <!-- responsive -->
-    <!-- <link rel="stylesheet" href="assets/css/responsive.css"> -->
+    <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
         :root {
@@ -52,16 +51,15 @@
         }
 
         body {
-    font-family: var(--font-family-sans-serif);
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    text-align: left;
-    box-sizing: border-box;
-    display: block;
-    margin: 0; /* Remove default margin to ensure full-width layout */
-}
+            font-family: var(--font-family-sans-serif);
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #212529;
+            text-align: left;
+            box-sizing: border-box;
+            display: block;
+        }
 
         /* Apply the provided styles to the header */
         .header {
@@ -163,6 +161,13 @@
                                             </a>
                                         </li>
                                         <li class="nav-item dropdown">
+                                            <a class="nav-link" href="images.html" role="button" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                  IMAGES
+                                                <div class="mr-hover-effect"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item dropdown">
                                             <a class="nav-link" href="deleteImages.html" role="button" aria-haspopup="true"
                                                 aria-expanded="false">
                                                 DELETE IMAGES
@@ -230,7 +235,7 @@
         $(document).ready(function () {
             // Function to fetch and populate user data table
             function fetchUserDataTable() {
-                $.get("https://snakeladder1.azurewebsites.net/getAllUser", function (userData) {
+                $.get("https://imagestoreazure.azurewebsites.net/getAllUser", function (userData) {
                     var userDataTable = $('#userDataTable tbody');
                     userDataTable.empty(); // Clear existing table rows
                     $.each(userData, function (index, user) {

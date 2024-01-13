@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast Post</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- Plugin css -->
+    <link rel="stylesheet" href="assets/css/plugin.css">
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- responsive -->
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <style>
+        /* Add your custom styles here */
+        .container-table {
+            margin-top: 20px;
+        }
+        
+        .container-table table {
+    border-color: black;
+}
+
+        .container-table th,
+        .container-table td {
+            text-align: center;
+        }
+
+        .container-table td {
+            cursor: pointer;
+        }
+
+        .container-table img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body style="background-color: rgb(231, 231, 87);">
+    <!-- preloader area start -->
+    <div class="preloader" id="preloader">
+        <div class="loader loader-1">
+            <div class="loader-outter"></div>
+            <div class="loader-inner"></div>
+        </div>
+    </div>
+    <!-- preloader area end -->
+
+    <!-- Header Area Start -->
+    <header class="header">
+        <!-- Top Header Area Start -->
+        <section class="top-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="content">
+                            <div class="left-content">
+                                <ul class="left-list">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Top Header Area End -->
+        <!--Main-Menu Area Start-->
+        <div class="mainmenu-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg navbar-light">
+                            <div class="container-fluid p-0">
+                                <a class="navbar-brand" href="index.html">
+                                </a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#main_menu" aria-controls="main_menu" aria-expanded="false"
+                                    aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse justify-content-end fixed-height"
+                                    id="main_menu">
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link" href="index.html" role="button" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                Upload Images
+                                                <div class="mr-hover-effect"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link" href="images.html" role="button" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                Images
+                                                <div class="mr-hover-effect"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link" href="deleteImages.html" role="button"
+                                                aria-haspopup="true" aria-expanded="false">
+                                                Delete Images
+                                                <div class="mr-hover-effect"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link" href="userData.html" role="button" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                User Data
+                                                <div class="mr-hover-effect"></div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Main-Menu Area Start-->
+    </header>
+    <!-- Header Area End -->
+
+    <!-- Contact Area End -->
+    <section class="contact" style="background-color: rgb(231, 231, 87);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6" style="width:1000px;">
+                    <div class="contact-form-wrapper">
+
+                        <!-- Container Table -->
+                        <div class="container-table">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Sr.no</th>
+                                                <th scope="col">View</th>
+                                                <th scope="col">Container Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="containerTableBody">
+                                            <!-- Container names will be dynamically inserted here -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Container Table -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Area End -->
+
+    <!-- Modal for displaying images -->
+    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel">Images for Container</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="imageModalBody">
+                    <!-- Images for the selected container will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Your existing script imports here -->
+    <script src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/plugin.js"></script>
+    <script src="assets/js/TweenMax.js"></script>
+    <script src="assets/js/mousemoveparallax.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <!-- Fetch and Display Container Names and Images Script -->
+    <script>
+        // Function to fetch and populate container table
+        function fetchAndPopulateContainerTable() {
+            $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
+                var containerTableBody = $('#containerTableBody');
+                containerTableBody.empty(); // Clear existing rows
+
+                $.each(data, function (index, value) {
+                    var row = $('<tr>');
+                    row.append($('<th>', { scope: 'row', text: index + 1 }));
+                    row.append($('<td>').append(
+                        $('<button>', {
+                            text: 'View',
+                            class: 'btn btn-primary',
+                            click: function () {
+                                fetchAndDisplayImages(value);
+                            }
+                        })
+                    ));
+                    row.append($('<td>', {
+                        text: value,
+                        click: function () {
+                            fetchAndDisplayImages(value);
+                        }
+                    }));
+
+                    containerTableBody.append(row);
+                });
+
+                console.log("Containers names fetched:", data);
+            });
+        }
+
+        // Function to fetch and display images for the selected container
+        function fetchAndDisplayImages(containerName) {
+            $.get("https://imagestoreazure.azurewebsites.net/getContainersAsPerName?containerName=" + containerName, function (data) {
+                var imageModalBody = $('#imageModalBody');
+                imageModalBody.empty();
+
+                $.each(data.images, function (index, imageUrl) {
+                    var img = $('<img>', { src: imageUrl, alt: 'Image' });
+                    imageModalBody.append(img);
+                });
+
+                // Update modal title
+                $('#imageModalLabel').text("Images for Container - " + containerName);
+
+                // Show the modal
+                $('#imageModal').modal('show');
+
+                console.log("Images for container '" + containerName + "' fetched:", data);
+            });
+        }
+
+        // Fetch and populate the container table on page load
+        fetchAndPopulateContainerTable();
+    </script>
+</body>
+
+</html>

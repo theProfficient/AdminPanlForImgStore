@@ -5,7 +5,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="forntEnd-Developer" content="Mamunur Rashid">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fast Post</title>
     <!-- favicon -->
@@ -95,6 +94,14 @@
                                                 <div class="mr-hover-effect"></div>
                                             </a>
                                         </li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link" href="images.html" role="button" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                  Images
+                                                <div class="mr-hover-effect"></div>
+                                            </a>
+                                        </li>
+
                                         <li class="nav-item dropdown">
                                             <a class="nav-link" href="deleteImages.html" role="button" aria-haspopup="true"
                                                 aria-expanded="false">
@@ -220,7 +227,14 @@
     //     }
     // });
 
+    // <script>
     $(document).ready(function () {
+        // Function to validate container name format
+        function isValidContainerName(containerName) {
+            var regex = /^[a-z0-9][a-z0-9-]{2,62}$/;
+            return regex.test(containerName);
+        }
+
         // Function to create a container
         function createContainer(containerName) {
             $.post("https://imagestoreazure.azurewebsites.net/createContainerByAdmin?containerName=" + containerName)
@@ -240,12 +254,15 @@
 
             if (containerName === "") {
                 alert("Please enter a container name.");
+            } else if (!isValidContainerName(containerName)) {
+                alert("Invalid container name. It must start with a letter or number, contain only lowercase letters, numbers, and hyphens, and be between 3 and 63 characters long.");
             } else {
                 createContainer(containerName);
             }
         });
     });
 </script>
+
 
 <!-- -------------------Update the script section in the <body> -->
     <script>
