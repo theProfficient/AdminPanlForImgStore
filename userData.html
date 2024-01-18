@@ -348,7 +348,7 @@
         };
 
         // Update API URL with UserId and fields in query parameters
-        var updateApiUrl = "http://localhost:3001/updateUser?UserId=" + selectedUserId + "&" + selectedFieldName + "=" + editedUserData[selectedFieldName];
+        var updateApiUrl = "https://imagestoreazure.azurewebsites.net/updateUser?UserId=" + selectedUserId + "&" + selectedFieldName + "=" + editedUserData[selectedFieldName];
 
         $.ajax({
             url: updateApiUrl,
