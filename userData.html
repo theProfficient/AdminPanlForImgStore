@@ -6,19 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Fast Post</title>
-    <!-- favicon -->
+    <title>Fast Post</title>
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
-    <!-- bootstrap -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <!-- Plugin css -->
-    <link rel="stylesheet" href="assets/css//plugin.css">
-    <!-- stylesheet -->
-    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
-    <!-- responsive -->
+    <link rel="stylesheet" href="assets/css/plugin.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <style>
+
+          <style>
         :root {
             --blue:#252f5a;
             --indigo: #6610f2;
@@ -60,8 +55,6 @@
             box-sizing: border-box;
             display: block;
         }
-
-        /* Apply the provided styles to the header */
         .header {
             -webkit-text-size-adjust: 100%;
             -webkit-tap-highlight-color: transparent;
@@ -104,8 +97,17 @@
             padding: 8px;
             border: 1px solid white;
         }
+        #editUserModal label {
+            margin-top: 10px;
+        }
+
+        #editUserModal .modal-body {
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+        }
     </style>
 </head>
+
 <body style="background-color: rgb(231, 231, 87);">
     <!-- preloader area start -->
     <div class="preloader" id="preloader">
@@ -191,80 +193,176 @@
         </div>
         <!--Main-Menu Area Start-->
     </header>
-    <!-- Header Area End -->
+<!-- Header Area End -->
 
-    <!-- <section class="contact" style="background-color: rgb(231, 231, 87);"> -->
-       
-    <section>
-        <!-- <div class="container"> -->
-            <!-- <div class="row justify-content-center"> -->
-                <div class="col-lg-8">
-                    <div>
-                        <table id="userDataTable" class="table">
-                            <thead>
-                                <tr>
-                                    <th>UserId</th>
-                                    <th>UserName</th>
-                                    <th>Email</th>
-                                    <th>WhatsAppNumber</th>
-                                    <th>ReferralCode</th>
-                                    <th>RealMoney</th>
-                                    <th>CompanyName</th>
-                                    <th>FacebookId</th>
-                                    <th>InstaId</th>
-                                    <th>Credits</th>
-                                    <th>IsActive</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- User data will be dynamically added here -->
-                            </tbody>
-                        </table>
-                    </div>
+    <!-- Edit User Modal -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            <!-- </div> -->
-        <!-- </div> -->
-    </section>
-      <!-- Your existing script tags... -->
-      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-   
+                <div class="modal-body">
+                    <form id="editUserForm">
+                        <div class="form-group">
+                            <label for="editUserName">UserName</label>
+                            <input type="text" class="form-control" id="editUserName" name="userName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editEmail">Email</label>
+                            <input type="text" class="form-control" id="editEmail" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editWhatsAppNumber">WhatsApp Number</label>
+                            <input type="text" class="form-control" id="editWhatsAppNumber" name="whatsAppNumber"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editRealMoney">Real Money</label>
+                            <input type="text" class="form-control" id="editRealMoney" name="realMoney" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editFacebookId">Facebook ID</label>
+                            <input type="text" class="form-control" id="editFacebookId" name="facebookId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editInstaId">Instagram ID</label>
+                            <input type="text" class="form-control" id="editInstaId" name="instaId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCredits">Credits</label>
+                            <input type="text" class="form-control" id="editCredits" name="credits" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editIsActive">Is Active</label>
+                            <input type="text" class="form-control" id="editIsActive" name="isActive" required>
+                        </div>
+
+                        <button type="button" class="btn btn-primary" id="saveChangesBtn">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+<section>
+    <div class="col-lg-8">
+        <div>
+            <table id="userDataTable" class="table">
+                <thead>
+                    <tr>
+                        <th>Sr.No</th>
+                        <th>UserId</th>
+                        <th>Edit</th>
+                        <th>UserName</th>
+                        <th>Email</th>
+                        <th>WhatsAppNub</th>
+                        <th>ReferralCode</th>
+                        <th>RealMoney</th>
+                        <th>FacebookId</th>
+                        <th>InstaId</th>
+                        <th>Credits</th>
+                        <th>IsActive</th>          
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- User data will be dynamically added here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+   <!-- Existing code... -->
+
    <script>
+    $(document).ready(function () {
+        var selectedUserId;
 
-        $(document).ready(function () {
-            // Function to fetch and populate user data table
-            function fetchUserDataTable() {
-                $.get("https://imagestoreazure.azurewebsites.net/getAllUser", function (userData) {
-                    var userDataTable = $('#userDataTable tbody');
-                    userDataTable.empty(); // Clear existing table rows
-                    $.each(userData, function (index, user) {
-                        userDataTable.append('<tr>' +
-                            '<td>' + user.UserId + '</td>' +
-                            '<td>' + user.userName + '</td>' +
-                            '<td>' + user.email + '</td>' +
-                            '<td>' + user.whatsAppNumber + '</td>' +
-                            '<td>' + user.referralCode + '</td>' +
-                            '<td>' + user.realMoney + '</td>' +
-                            '<td>' + user.companyName + '</td>' +
-                            '<td>' + user.facebookId + '</td>' +
-                            '<td>' + user.instaId + '</td>' +
-                            '<td>' + user.credits + '</td>' +
-                            // '<td>' + user._id + '</td>' +
-                            '<td>' + user.isActive + '</td>' +
-                            // '<td>' + user.isDeleted + '</td>' +
-                            // '<td>' + JSON.stringify(user.transactionHistory) + '</td>' +
-                            '</tr>');
-                    });
+        function populateEditForm(user) {
+            $('#editUserName').val(user.userName);
+            $('#editEmail').val(user.email);
+            $('#editWhatsAppNumber').val(user.whatsAppNumber);
+            $('#editRealMoney').val(user.realMoney);
+            $('#editFacebookId').val(user.facebookId);
+            $('#editInstaId').val(user.instaId);
+            $('#editCredits').val(user.credits);
+            $('#editIsActive').val(user.isActive);
+        }
+
+        function fetchUserDataTable() {
+            $.get("https://imagestoreazure.azurewebsites.net/getAllUser", function (userData) {
+                var userDataTable = $('#userDataTable tbody');
+                userDataTable.empty();
+                $.each(userData, function (index, user) {
+                    userDataTable.append('<tr>' +
+                        '<td>' + (index + 1) + '</td>' + 
+                        '<td>' + user.UserId + '</td>' +
+                        '<td><button class="btn btn-info edit-btn" data-toggle="modal" data-target="#editUserModal" data-user-id="' + user.UserId + '">Edit</button></td>' +
+                        '<td>' + user.userName + '</td>' +
+                        '<td>' + user.email + '</td>' +
+                        '<td>' + user.whatsAppNumber + '</td>' +
+                        '<td>' + user.referralCode + '</td>' +
+                        '<td>' + user.realMoney + '</td>' +
+                        '<td>' + user.facebookId + '</td>' +
+                        '<td>' + user.instaId + '</td>' +
+                        '<td>' + user.credits + '</td>' +
+                        '<td>' + user.isActive + '</td>' +
+                        '</tr>');
                 });
+
+                $('.edit-btn').click(function () {
+                    selectedUserId = $(this).data('user-id');
+                    var user = userData.find(u => u.UserId === selectedUserId);
+                    populateEditForm(user);
+                });
+            });
+        }
+
+        fetchUserDataTable();
+
+
+        $('.form-control').focus(function () {
+        selectedFieldName = $(this).attr('name');
+    });
+
+    $('#saveChangesBtn').click(function () {
+        var editedUserData = {
+            userId: selectedUserId,
+            userName: $('#editUserName').val(),
+            email: $('#editEmail').val(),
+            whatsAppNumber: $('#editWhatsAppNumber').val(),
+            realMoney: $('#editRealMoney').val(),
+            facebookId: $('#editFacebookId').val(),
+            instaId: $('#editInstaId').val(),
+            credits: $('#editCredits').val(),
+            isActive: $('#editIsActive').val(),
+        };
+
+        // Update API URL with UserId and fields in query parameters
+        var updateApiUrl = "http://localhost:3001/updateUser?UserId=" + selectedUserId + "&" + selectedFieldName + "=" + editedUserData[selectedFieldName];
+
+        $.ajax({
+            url: updateApiUrl,
+            type: 'PUT',
+            data: editedUserData,
+            success: function (response) {
+                console.log(response);
+                $('#editUserModal').modal('hide');
+                fetchUserDataTable();
             }
-
-            // Fetch user data initially
-            fetchUserDataTable();
-
-       
         });
-    </script>
+    });
+});
+</script>
 </body>
 
 </html>

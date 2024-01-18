@@ -24,12 +24,17 @@
         }
         
         .container-table table {
-    border-color: black;
+         border-color: black;
 }
 
         .container-table th,
         .container-table td {
             text-align: center;
+        }
+
+        .container-table thead th{
+            background-color:#21295C;
+            color:white;
         }
 
         .container-table td {
@@ -41,6 +46,15 @@
             height: auto;
             margin-top: 10px;
         }
+
+        .btn {
+        width: 80px;
+        height: 35px;
+         /* Adjust the value to get the desired cylindrical shape */
+        font-size:13px;
+        background-color: #1ed6d6;
+    }
+        
     </style>
 </head>
 
@@ -99,7 +113,7 @@
                                         <li class="nav-item dropdown">
                                             <a class="nav-link" href="images.html" role="button" aria-haspopup="true"
                                                 aria-expanded="false">
-                                                Images
+                                               View Images
                                                 <div class="mr-hover-effect"></div>
                                             </a>
                                         </li>
@@ -195,41 +209,50 @@
     <script>
         // Function to fetch and populate container table
         function fetchAndPopulateContainerTable() {
-            $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
-                var containerTableBody = $('#containerTableBody');
-                containerTableBody.empty(); // Clear existing rows
+        $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
+            var containerTableBody = $('#containerTableBody');
+            containerTableBody.empty(); // Clear existing rows
 
-                $.each(data, function (index, value) {
-                    var row = $('<tr>');
-                    row.append($('<th>', { scope: 'row', text: index + 1 }));
-                    row.append($('<td>').append(
-                        $('<button>', {
-                            text: 'View',
-                            class: 'btn btn-primary',
-                            click: function () {
-                                fetchAndDisplayImages(value);
-                            }
-                        })
-                    ));
-                    row.append($('<td>', {
-                        text: value,
+            $.each(data, function (index, value) {
+                var row = $('<tr>');
+                row.append($('<th>', { scope: 'row', text: index + 1 }));
+                row.append($('<td>').append(
+                    $('<button>', {
+                        text: 'View',
+                        class: 'btn btn-primary',
                         click: function () {
                             fetchAndDisplayImages(value);
                         }
-                    }));
+                    })
+                ));
+                row.append($('<td>', {
+                    text: value,
+                    click: function () {
+                        fetchAndDisplayImages(value);
+                    }
+                }));
 
-                    containerTableBody.append(row);
-                });
-
-                console.log("Containers names fetched:", data);
+                containerTableBody.append(row);
             });
-        }
 
-        // Function to fetch and display images for the selected container
-        function fetchAndDisplayImages(containerName) {
-            $.get("https://imagestoreazure.azurewebsites.net/getContainersAsPerName?containerName=" + containerName, function (data) {
+            console.log("Containers names fetched:", data);
+        });
+    }
+
+    // Function to fetch and display images for the selected container
+    function fetchAndDisplayImages(containerName) {
+        $.ajax({
+            url: "https://imagestoreazure.azurewebsites.net/getContainersAsPerName?containerName=" + containerName,
+            type: 'GET',
+            success: function (data) {
                 var imageModalBody = $('#imageModalBody');
                 imageModalBody.empty();
+
+                if (data.status === false) {
+                    // If status is false, display prompt message
+                    alert("Images not found");
+                    return;
+                }
 
                 $.each(data.images, function (index, imageUrl) {
                     var img = $('<img>', { src: imageUrl, alt: 'Image' });
@@ -242,13 +265,24 @@
                 // Show the modal
                 $('#imageModal').modal('show');
 
-                console.log("Images for container '" + containerName + "' fetched:", data);
-            });
-        }
+                // Add event listener to close button
+                $('.modal-header .close').on('click', function () {
+                    // Hide the modal when close button is clicked
+                    $('#imageModal').modal('hide');
+                });
 
-        // Fetch and populate the container table on page load
-        fetchAndPopulateContainerTable();
-    </script>
+                console.log("Images for container '" + containerName + "' fetched:", data);
+            },
+            error: function (xhr, status, error) {
+                // Display prompt message in case of an error
+                alert("Images not found ");
+            }
+        });
+    }
+
+    // Fetch and populate the container table on page load
+    fetchAndPopulateContainerTable();
+</script>
 </body>
 
 </html>
