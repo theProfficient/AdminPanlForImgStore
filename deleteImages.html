@@ -270,7 +270,7 @@
             function deleteAllImages(containerName) {
                 $.ajax({
                     type: "DELETE",
-                    url: "http://localhost:3001/api/deleteAllImages/" + containerName,
+                    url: "https://imagestoreazure.azurewebsites.net/api/deleteAllImages/" + containerName,
                     success: function (response) {
                         console.log("Container images deleted successfully:", response);
                         window.alert("Container images successfully deleted");
