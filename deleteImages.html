@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="forntEnd-Developer" content="Mamunur Rashid">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fast Post</title>
     <!-- favicon -->
@@ -102,6 +103,7 @@
                                             </a>
                                         </li>
                                         <li class="nav-item dropdown">
+                                            
                                             <a class="nav-link" href="deleteImages.html" role="button" aria-haspopup="true"
                                                 aria-expanded="false">
                                                 Delete Images
@@ -139,32 +141,33 @@
     <!------------------delete Container Box -------------->
     <div class="col-md-6">
         <div class="contact-box">
-            <h4 class="title">
-                Delete Images
-            </h4>
-            <form id="deleteContainerForm">
-                <div>
-                    <select class="input-field" name="container" required>
-                        <!-- Options will be dynamically added here -->
-                    </select>
-                    <button type="submit" class="mybtn1"
-                        style="width: 120px; height: 40px; font-size: 10px; text-align:center; background: #1ed6d6;">Delete</button>
-                </div>
-            </form>
+            <h4 class="title"> Delete Container</h4>
+            <div id="deleteContainerName">
+                <select class="input-field" name="container" required>
+                    <!-- Options will be dynamically added here -->
+                </select>
+                <button type="button" class="mybtn1" id="deleteContainerBtn"
+                    style="width: 120px; height: 40px; font-size: 10px; text-align:center; background: #1ed6d6;">Delete</button>
+            </div>
         </div>
     </div>
+
 
         <!------------------ delete all Images of container ------------------->
         <div class="col-md-6">
             <div class="contact-box">
-                <h4 class="title"> Delete Container</h4>
-                <div id="deleteContainerName">
-                    <select class="input-field" name="container" required>
-                        <!-- Options will be dynamically added here -->
-                    </select>
-                    <button type="button" class="mybtn1" id="deleteContainerBtn"
-                        style="width: 120px; height: 40px; font-size: 10px; text-align:center; background: #1ed6d6;">Delete</button>
-                </div>
+                <h4 class="title">
+                    Delete Images
+                </h4>
+                <form id="deleteContainerForm">
+                    <div>
+                        <select class="input-field" name="container" required>
+                            <!-- Options will be dynamically added here -->
+                        </select>
+                        <button type="submit" class="mybtn1"
+                            style="width: 120px; height: 40px; font-size: 10px; text-align:center; background: #1ed6d6;">Delete</button>
+                    </div>
+                </form>
             </div>
         </div>
                 </div>

@@ -216,31 +216,31 @@
                             <label for="editEmail">Email</label>
                             <input type="text" class="form-control" id="editEmail" name="email" required>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="editWhatsAppNumber">WhatsApp Number</label>
                             <input type="text" class="form-control" id="editWhatsAppNumber" name="whatsAppNumber"
                                 required>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <label for="editRealMoney">Real Money</label>
                             <input type="text" class="form-control" id="editRealMoney" name="realMoney" required>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="editFacebookId">Facebook ID</label>
-                            <input type="text" class="form-control" id="editFacebookId" name="facebookId" required>
-                        </div>
-                        <div class="form-group">
+                            <input type="text" class="form-control" id="editFacebookId" name="facebookId" readonly>
+                        </div> -->
+                        <!-- <div class="form-group">
                             <label for="editInstaId">Instagram ID</label>
-                            <input type="text" class="form-control" id="editInstaId" name="instaId" required>
-                        </div>
+                            <input type="text" class="form-control" id="editInstaId" name="instaId" readonly>
+                        </div> -->
                         <div class="form-group">
                             <label for="editCredits">Credits</label>
                             <input type="text" class="form-control" id="editCredits" name="credits" required>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="editIsActive">Is Active</label>
-                            <input type="text" class="form-control" id="editIsActive" name="isActive" required>
-                        </div>
+                            <input type="text" class="form-control" id="editIsActive" name="isActive" readonly>
+                        </div> -->
 
                         <button type="button" class="btn btn-primary" id="saveChangesBtn">Save Changes</button>
                     </form>
@@ -339,13 +339,30 @@
             userId: selectedUserId,
             userName: $('#editUserName').val(),
             email: $('#editEmail').val(),
-            whatsAppNumber: $('#editWhatsAppNumber').val(),
+            // whatsAppNumber: $('#editWhatsAppNumber').val(),
             realMoney: $('#editRealMoney').val(),
-            facebookId: $('#editFacebookId').val(),
-            instaId: $('#editInstaId').val(),
+            // facebookId: $('#editFacebookId').val(),
+            // instaId: $('#editInstaId').val(),
             credits: $('#editCredits').val(),
-            isActive: $('#editIsActive').val(),
+            // isActive: $('#editIsActive').val(),
         };
+
+         //___________validation 
+         if(!isValidEmail(editedUserData.email)){
+            alert("please enter a valid email address");
+            return;
+         }
+
+         if(!isNumericAndGreaterThanZero(editedUserData.realMoney)){
+            alert("please enter valid value for realMoney & must be greater than zero");
+            return;
+         }
+       
+         if(!isNumericAndGreaterThanZero(editedUserData.credits)){
+            alert("please enter valid value for credits & must be greater than zero")
+         }
+
+
 
         // Update API URL with UserId and fields in query parameters
         var updateApiUrl = "https://imagestoreazure.azurewebsites.net/updateUser?UserId=" + selectedUserId + "&" + selectedFieldName + "=" + editedUserData[selectedFieldName];
@@ -361,6 +378,15 @@
             }
         });
     });
+
+    function isValidEmail(email){
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email)
+    }
+
+    function isNumericAndGreaterThanZero(number){
+        return !isNaN(number)&& parseFloat(number)>0;
+    }
 });
 </script>
 </body>
