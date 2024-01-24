@@ -184,6 +184,7 @@
      <script src="assets/js/plugin.js"></script>
      <script src="assets/js/TweenMax.js"></script>
      <script src="assets/js/mousemoveparallax.js"></script>
+     
      <script src="assets/js/main.js"></script>
 
 
@@ -224,7 +225,7 @@
 
             // Event listener for the delete Container button
             $('#deleteContainerBtn').on('click', function () {
-                var containerName = $('select[name="container"]').val();
+                var containerName = $('#deleteContainerName select[name="container"]').val();
 
                 if (containerName === "") {
                     alert("Please select a container.");
@@ -256,8 +257,8 @@
                 e.preventDefault();
 
                 // Get the selected container name for deleting images
-                var containerName = $('select[name="container"]').val();
-
+                var containerName = $('#deleteContainerForm select[name="container"]').val();
+                    console.log(containerName,"_________containerName");
                 if (containerName === "") {
                     alert("Please select a container.");
                 } else {
@@ -269,7 +270,7 @@
             function deleteAllImages(containerName) {
                 $.ajax({
                     type: "DELETE",
-                    url: "https://imagestoreazure.azurewebsites.net/api/deleteAllImages/" + containerName,
+                    url: "http://localhost:3001/api/deleteAllImages/" + containerName,
                     success: function (response) {
                         console.log("Container images deleted successfully:", response);
                         window.alert("Container images successfully deleted");
@@ -289,7 +290,7 @@
             });
         });
     </script>
-    <script src="assets/js/main.js"></script>
+    <!-- <script src="assets/js/main.js"></script> -->
 </body>
 
 </html>
