@@ -237,7 +237,7 @@
 
         // Function to create a container
         function createContainer(containerName) {
-            $.post("https://imagestoreazure.azurewebsites.net/createContainerByAdmin?containerName=" + containerName)
+            $.post("http://localhost:3001/createContainerByAdmin?containerName=" + containerName)
                 .done(function (data) {
                     console.log("Container created successfully:", data);
                     alert("Container created successfully: " + containerName);
