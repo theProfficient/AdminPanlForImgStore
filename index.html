@@ -18,31 +18,72 @@
     <!-- responsive -->
     <link rel="stylesheet" href="assets/css/responsive.css">
     <style>
-        .contact-box {
-            margin-left: 40px;
-            margin-right: 60px;
-            /* margin-bottom: 10px; */
-            margin-top: 70px;
+        .container-table {
+            margin-top: 20px;
         }
-    
-        .contact {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin-bottom: 50px; 
+
+        .container-table table {
+            border-color: black;
+            width: 100%;
+            background-color: rgb(39, 51, 84);
         }
-    
-        .contact-form-wrapper {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
+
+        .container-table th,
+        .container-table td {
+            text-align: center;
+            color: white;
+        }
+
+        .container-table td {
+            cursor: pointer;
+        }
+
+        .container-table img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        .container-table thead th {
+            background-color: #138496;
+            /* Change the background color of th */
+        }
+
+        .btn {
+            width: 80px;
+            height: 35px;
+            /* Adjust the value to get the desired cylindrical shape */
+            font-size: 13px;
+            background-color: #138496;
+        }
+
+        .flower-button {
+            color: #fff;
+            padding: 15px 25px;
+            background-color: #38D2D2;
+            background-image: radial-gradient(93% 87% at 87% 89%, rgba(0, 0, 0, 0.23) 0%, transparent 86.18%), radial-gradient(66% 66% at 26% 20%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 69.79%, rgba(255, 255, 255, 0) 100%);
+            box-shadow: inset -3px -3px 9px rgba(255, 255, 255, 0.25), inset 0px 3px 9px rgba(255, 255, 255, 0.3), inset 0px 1px 1px rgba(255, 255, 255, 0.6), inset 0px -8px 36px rgba(0, 0, 0, 0.3), inset 0px 1px 5px rgba(255, 255, 255, 0.6), 2px 19px 31px rgba(0, 0, 0, 0.2);
+            border-radius: 14px;
+            font-weight: bold;
+            font-size: 16px;
+            border: 0;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            cursor: pointer;
+
+            /* Hover effect */
+            transition: background-color 0.3s;
+        }
+
+        .flower-button:hover {
+            background-color: #a124c7;
         }
     </style>
-    
+
 </head>
 
-<body style="background-color: rgb(231, 231, 87);">
+<body style="background-color: #878781;">
     <!-- preloader area start -->
     <div class="preloader" id="preloader">
         <div class="loader loader-1">
@@ -69,7 +110,7 @@
                 </div>
         </section>
         <!-- Top Header Area End -->
-        <!--Main-Menu Area Start-->  
+        <!--Main-Menu Area Start-->
         <div class="mainmenu-area">
             <div class="container">
                 <div class="row">
@@ -79,32 +120,40 @@
                                 <a class="navbar-brand" href="index.html">
                                 </a>
                                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#main_menu" aria-controls="main_menu" aria-expanded="false"
-                                aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
+                                    data-bs-target="#main_menu" aria-controls="main_menu" aria-expanded="false"
+                                    aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
                                 <div class="collapse navbar-collapse justify-content-end fixed-height"
                                     id="main_menu">
                                     <ul class="navbar-nav ml-auto">
-
                                         <li class="nav-item dropdown">
                                             <a class="nav-link" href="index.html" role="button" aria-haspopup="true"
                                                 aria-expanded="false">
-                                                Upload Images
+                                                App View
                                                 <div class="mr-hover-effect"></div>
                                             </a>
                                         </li>
+                                
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link" href="images.html" role="button" aria-haspopup="true"
-                                                aria-expanded="false">
+                                            <a class="nav-link" href="viewContainers.html" role="button"
+                                                aria-haspopup="true" aria-expanded="false">
                                                 VIEW Images
                                                 <div class="mr-hover-effect"></div>
                                             </a>
                                         </li>
 
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link" href="deleteImages.html" role="button" aria-haspopup="true"
+                                            <a class="nav-link" href="create.html" role="button" aria-haspopup="true"
                                                 aria-expanded="false">
+                                                Upload Images
+                                                <div class="mr-hover-effect"></div>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link" href="deleteImages.html" role="button"
+                                                aria-haspopup="true" aria-expanded="false">
                                                 Delete Images
                                                 <div class="mr-hover-effect"></div>
                                             </a>
@@ -128,68 +177,42 @@
     </header>
     <!-- Header Area End -->
 
- <!-- Contact Area End -->
-    <section class="contact" style="background-color: rgb(231, 231, 87);">
+
+    <!-- Contact Area End -->
+    <section class="contact" style="background-color: #878781;">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6" style="width:1000px;">
                     <div class="contact-form-wrapper">
 
-                        <div class="row">
-                            
-            <!------------------ Create Container Box -->
-                            <div class="col-md-6">
-                                <div class="contact-box">
-                                    <h4 class="title">Create Container</h4>
-                                    <div>
-                                        <input type="text" class="input-field" id="createContainerName"
-                                            placeholder="Enter Container Name" required>
-                                        <button type="button" class="mybtn1" id="createContainerBtn"
-                                            style="width: 120px; height: 40px; font-size: 10px; text-align:center; background: #1ed6d6;">Create</button>
-                                    </div>
-                                </div>
-                            </div>
-                            
+                        <!-- Container Table -->
+                        <div class="container-table">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Sr.no</th>
+                                                <th scope="col">categories</th>
+                                                <th scope="col">Containers of categories</th>
+                                                <th scope="col">Click</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="containerTableBody">
 
-           <!------------------ Upload Image Box -->
-                            <div class="col-md-6">
-                                <div class="contact-box">
-                                    <h4 class="title">
-                                        Upload Image
-                                    </h4>
-                                    <form id="myForm" action="https://imagestoreazure.azurewebsites.net/api/uploadImages/festival"
-                                        method="POST" enctype="multipart/form-data">
-                                        <!-- Existing container selection -->
-                                        <div>
-                                            <!-- <label for="container">Select Container:</label> -->
-                                            <select class="input-field" name="container" required>
-                                                <!-- Options will be dynamically added here -->
-                                            </select>
-                                            <button type="button" class="mybtn1" id="fetchContainers"
-                                                style="width: 120px; height: 40px; font-size: 10px; text-align:center; background: #1ed6d6;">Containers</button>
-                                        </div>
-                                        <!-- Existing input for selecting images -->
-                                        <input type="file" class="input-field" name="images" required placeholder="SELECT IMAGES"
-                                            multiple>
-                                        <!-- New input for entering price -->
-                                        <div>
-                                            <!-- <label for="price">Enter Price:</label> -->
-                                            <input type="number" class="input-field" name="price" placeholder="Price"
-                                                required>
-                                        </div>
-                                        <!-- Submit button -->
-                                        <button type="submit" class="mybtn1"
-                                            style="width: 120px; height: 40px; font-size: 10px; text-align:center;background: #1ed6d6;">Upload</button>
-                                    </form>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
+                        <!-- End Container Table -->
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- Contact Area End -->
+
 
     <!-- Your existing script imports here -->
     <script src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
@@ -201,133 +224,102 @@
     <script src="assets/js/mousemoveparallax.js"></script>
     <script src="assets/js/main.js"></script>
 
-    <!---------------------log in script---------------------------------------->
+    <!-- Login script -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Check if the user is logged in
             var isLoggedIn = localStorage.getItem('isLoggedIn');
-    
+
             if (!isLoggedIn) {
                 // If not logged in, redirect to the login page
                 window.location.href = 'loginPage.html';
             }
         });
-    </script> 
-    
-  <!----------------- create container by admin -->
+    </script>
 
-<script>
-    // document.addEventListener("DOMContentLoaded", function () {
-    //     // Check if the user is logged in
-    //     var isLoggedIn = localStorage.getItem('isLoggedIn');
-
-    //     if (!isLoggedIn) {
-    //         // If not logged in, redirect to the login page
-    //         window.location.href = 'loginPage.html';
-    //     }
-    // });
-
-    // <script>
-    $(document).ready(function () {
-        // Function to validate container name format
-        function isValidContainerName(containerName) {
-            var regex = /^[a-z0-9][a-z0-9-]{2,62}$/;
-            return regex.test(containerName);
-        }
-
-        // Function to create a container
-        function createContainer(containerName) {
-            $.post("http://localhost:3001/createContainerByAdmin?containerName=" + containerName)
-                .done(function (data) {
-                    console.log("Container created successfully:", data);
-                    alert("Container created successfully: " + containerName);
-                })
-                .fail(function (error) {
-                    console.error("Error creating container:", error.responseJSON.error);
-                    alert("Error creating container: " + error.responseJSON.error);
-                });
-        }
-
-        // Event listener for the Create Container button
-        $('#createContainerBtn').on('click', function () {
-            var containerName = $('#createContainerName').val().trim();
-
-            if (containerName === "") {
-                alert("Please enter a container name.");
-            } else if (!isValidContainerName(containerName)) {
-                alert("Invalid container name. It must start with a letter or number, contain only lowercase letters, numbers, and hyphens, and be between 3 and 63 characters long.");
-            } else {
-                createContainer(containerName);
-            }
-        });
-    });
-</script>
-
-
-<!-- -------------------Update the script section in the <body> -->
+    <!-- Display Categories script -->
     <script>
-        $(document).ready(function () {
-            // Function to fetch and populate container names
-            function fetchContainerNames() {
-                $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
-                    var containerSelect = $('select[name="container"]');
-                    containerSelect.empty(); 
-                    $.each(data, function (index, value) {
-                        containerSelect.append($('<option>', {
-                            value: value,
-                            text: value
-                        }));
-                    });
+        document.addEventListener("DOMContentLoaded", function () {
+            // Fetch data from the API
+            fetch('https://imagestoreazure.azurewebsites.net/getAllCategories')
+                .then(response => response.json())
+                .then(data => {
+                    // Check if the API response is successful
+                    if (data.status === true) {
+                        // Get the table body where you want to display the categories
+                        var categoryTableBody = document.getElementById('containerTableBody');
 
-                    console.log("Containers names fetched:", data);
-                });
-            }
+                        // Loop through the data and create table rows
+                        data.data.forEach(function (category, index) {
+                            // Create a table row for category
+                            var categoryRow = document.createElement('tr');
 
-            // Fetch container names on button click
-            $('#fetchContainers').on('click', function () {
-                fetchContainerNames();
-            });
+                            // Create a table cell for serial number
+                            var serialNumberCell = document.createElement('td');
+                            serialNumberCell.innerText = index + 1; // Serial number
+                            categoryRow.appendChild(serialNumberCell);
 
-            // Fetch container names initially
-            fetchContainerNames();
+                            // Create a table cell for category
+                            var categoryCell = document.createElement('td');
 
-            // Handle form submission
-            $("#myForm").submit(function (e) {
-                e.preventDefault();
+                            // Create a larger flower-shaped button using SVG
+                            var flowerButton = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                            flowerButton.setAttribute("width", "80");
+                            flowerButton.setAttribute("height", "80");
+                            flowerButton.innerHTML = `
+                                <circle cx="40" cy="40" r="38" fill="#0c1e68" />
+                                <text x="50%" y="50%" font-size="14" fill="#fff" text-anchor="middle" dy=".3em">${category}</text>
+                            `;
 
-                // Get the selected container name and price
-                var containerName = $('select[name="container"]').val();
-                var price = $('input[name="price"]').val();
+                            // Add box shadow effect
+                            flowerButton.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
 
-                // Create a FormData object to handle file uploads
-                var formData = new FormData($(this)[0]);
+                            // Append the flower-shaped button to the category cell
+                            categoryCell.appendChild(flowerButton);
+                            categoryRow.appendChild(categoryCell);
 
-                formData.append('containerName', containerName);
-                formData.append('price', price);
+                            // Create a table cell for container names
+                            var containerNamesCell = document.createElement('td');
+                            containerNamesCell.style.whiteSpace = 'nowrap'; // Prevent line break
+                            categoryRow.appendChild(containerNamesCell);
 
-                $.ajax({
-                    type: "POST",
-                    url:"https://imagestoreazure.azurewebsites.net/api/uploadImages?containerName=" + containerName + "&price=" + price,
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (response) {
-                        console.log("Files uploaded successfully:", response);
-                        window.alert("Successfully uploaded");
-                    },
-                    error: function (error) {
-                        console.error("Error uploading files:", error);
-                        window.alert("Error uploading files");
+                            // Create a button for "Containers" for each category
+                            var containersButton = document.createElement('button');
+                            containersButton.innerText = 'Click';
+                            containersButton.className = 'btn btn-primary flower-button';
+                            containersButton.style.marginTop = '10px';
+                            containersButton.style.marginLeft = 'auto';
+                            containersButton.style.marginRight = 'auto';
+                            containersButton.style.display = 'block';
+
+                            // Add click event to fetch container data and display container names
+                            containersButton.addEventListener('click', function () {
+                                fetch(`https://imagestoreazure.azurewebsites.net/getAllContainerAsPerSequence?indexNumber=${index + 1}`)
+                                    .then(response => response.json())
+                                    .then(containerData => {
+                                        // Check if the API response is successful
+                                        if (containerData.category) {
+                                            // Extract container names
+                                            var containerNames = containerData.category.map(container => container.containerName).join(', ');
+                                            // Display container names in the "Containers of categories" column
+                                            containerNamesCell.innerText = containerNames;
+                                        }
+                                    })
+                                    .catch(error => console.error('Error fetching container data:', error));
+                            });
+
+                            // Append the "Containers" button to the category row
+                            categoryRow.appendChild(containersButton);
+
+                            // Append the category row to the table body
+                            categoryTableBody.appendChild(categoryRow);
+                        });
                     }
-                });
-            });
-
-            document.getElementById("myForm").addEventListener("submit", function () {
-                setTimeout(function () {
-                    document.getElementById("myForm").reset();
-                }, 1000);
-            });
+                })
+                .catch(error => console.error('Error fetching data:', error));
         });
     </script>
+
 </body>
+
 </html>
