@@ -50,13 +50,37 @@
             background-color: #0a3d62/* Change the background color of th */
         }
 
-        .btn {
-            width: 80px;
-            height: 35px;
-            /* Adjust the value to get the desired cylindrical shape */
-            font-size: 13px;
-            background-color: #0a3d62
+        #userDataTable {
+            width: 100%;
+            border-collapse: collapse;
+            background-color:#3c6382
         }
+    
+        #userDataTable thead {
+            background-color:#0a3d62;
+            color: white;
+        }
+    
+        #userDataTable th,
+        #userDataTable td {
+            padding: 8px;
+            border: 1px solid black;
+            color: white; /* Change the text color to white */
+        }
+        #editUserModal form {
+        color: #000; /* Change the text color to black */
+    }
+
+    #editUserModal label {
+        color: #000; /* Change the label text color to black */
+    }
+
+    #editUserModal .modal-body {
+        max-height: calc(100vh - 200px);
+        overflow-y: auto;
+    }
+
+
 
     </style>
 </head>
@@ -145,13 +169,6 @@
                                                 <div class="mr-hover-effect"></div>
                                             </a>
                                         </li>
-                                        <!-- <li class="nav-item dropdown">
-                                            <a class="nav-link" href="userrrr.html" role="button" aria-haspopup="true"
-                                                aria-expanded="false">
-                                                USER 
-                                                <div class="mr-hover-effect"></div>
-                                            </a>
-                                        </li> -->
                                         
                                     </ul>
                                 </div>
@@ -165,57 +182,7 @@
     </header>
     <!-- Header Area End -->
 
-    <!-- Contact Area End -->
-    <section class="contact" style="background-color: #95afc0;">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6" style="width:1000px;">
-                    <div class="contact-form-wrapper">
-
-                        <!-- Container Table -->
-                        <div class="container-table">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Sr.no</th>
-                                                <th scope="col">View</th>
-                                                <th scope="col">Container Name</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="containerTableBody">
-                                            
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Container Table -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Contact Area End -->
-
-    <!-- Modal for displaying images -->
-    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="imageModalLabel">Images for Container</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" id="imageModalBody">
-                    <!-- Images for the selected container will be dynamically inserted here -->
-                </div>
-            </div>
-        </div>
-    </div>
+  
 
     <!-- Your existing script imports here -->
     <script src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
@@ -227,84 +194,7 @@
     <script src="assets/js/mousemoveparallax.js"></script>
     <script src="assets/js/main.js"></script>
 
-    <!-- Fetch and Display Container Names and Images Script -->
-    <script>
-        // Function to fetch and populate container table
-        function fetchAndPopulateContainerTable() {
-        $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
-            var containerTableBody = $('#containerTableBody');
-            containerTableBody.empty(); // Clear existing rows
-
-            $.each(data, function (index, value) {
-                var row = $('<tr>');
-                row.append($('<th>', { scope: 'row', text: index + 1 }));
-                row.append($('<td>').append(
-                    $('<button>', {
-                        text: 'View',
-                        class: 'btn btn-primary',
-                        click: function () {
-                            fetchAndDisplayImages(value);
-                        }
-                    })
-                ));
-                row.append($('<td>', {
-                    text: value,
-                    click: function () {
-                        fetchAndDisplayImages(value);
-                    }
-                }));
-
-                containerTableBody.append(row);
-            });
-
-            console.log("Containers names fetched:", data);
-        });
-    }
-
-    // Function to fetch and display images for the selected container
-    function fetchAndDisplayImages(containerName) {
-        $.ajax({
-            url: "https://imagestoreazure.azurewebsites.net/getContainersAsPerName?containerName=" + containerName,
-            type: 'GET',
-            success: function (data) {
-                var imageModalBody = $('#imageModalBody');
-                imageModalBody.empty();
-
-                if (data.status === false) {
-                    // If status is false, display prompt message
-                    alert("Images not found");
-                    return;
-                }
-
-                $.each(data.images, function (index, imageUrl) {
-                    var img = $('<img>', { src: imageUrl, alt: 'Image' });
-                    imageModalBody.append(img);
-                });
-
-                // Update modal title
-                $('#imageModalLabel').text("Images for Container - " + containerName);
-
-                // Show the modal
-                $('#imageModal').modal('show');
-
-                // Add event listener to close button
-                $('.modal-header .close').on('click', function () {
-                    // Hide the modal when close button is clicked
-                    $('#imageModal').modal('hide');
-                });
-
-                console.log("Images for container '" + containerName + "' fetched:", data);
-            },
-            error: function (xhr, status, error) {
-                // Display prompt message in case of an error
-                alert("Images not found ");
-            }
-        });
-    }
-
-    // Fetch and populate the container table on page load
-    fetchAndPopulateContainerTable();
-</script>
+   
 </body>
 
 </html>

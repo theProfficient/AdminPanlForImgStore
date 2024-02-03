@@ -854,7 +854,7 @@ select:focus {
   /* Main Menu Area Start */
 }
 .header.nav-fixed {
-  background: #252f5a;
+  background: #0a3d62;
   -webkit-box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
           box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
 }
@@ -937,7 +937,7 @@ select:focus {
   color: #fff;
   top: -7px;
   right: -10px;
-  background: #252f5a;
+  background: #0a3d62;
   font-size: 10px;
   border-radius: 50px;
   text-align: center;
@@ -954,7 +954,7 @@ select:focus {
   color: #fff;
   top: -7px;
   right: -10px;
-  background: #252f5a;
+  background: #0a3d62;
   font-size: 10px;
   border-radius: 50px;
   text-align: center;
@@ -1051,7 +1051,7 @@ select:focus {
   color: #a1aed4;
 }
 .header .mainmenu-area {
-  background: #252f5a;
+  background: #0a3d62;
 }
 .header .mainmenu-area .navbar {
   padding: 0px 0px;
@@ -1504,7 +1504,7 @@ select:focus {
   padding: 55px 30px 35px;
   -webkit-transition: all 0.3s ease-in;
   transition: all 0.3s ease-in;
-  background: #252f5a;
+  background: #0a3d62;
   -webkit-transform: translate(0);
           transform: translate(0);
   border-radius: 10px;
@@ -1854,7 +1854,7 @@ select:focus {
   font-weight: 600;
   text-transform: uppercase;
   color: #FFF;
-  background: #252f5a;
+  background: #0a3d62;
   margin: 0px 5px;
 }
 .activities .tab-menu-area .nav-lend .nav-item .nav-link.active {
@@ -2428,7 +2428,7 @@ select:focus {
   margin-top: -120px;
 }
 .play-games .gaming-activities .gaming-activities-inner .single-activities {
-  background: #252f5a;
+  background: #0a3d62;
   padding: 0px 30px 20px;
 }
 .play-games .gaming-activities .gaming-activities-inner .single-activities .top-area {
@@ -2458,7 +2458,7 @@ select:focus {
   border-radius: 5px;
   top: -10px;
   position: relative;
-  background: #252f5a;
+  background: #0a3d62;
   color: #fff;
 }
 .play-games .gaming-activities .gaming-activities-inner .single-activities .top-area .left .icon span i {
@@ -2502,7 +2502,7 @@ select:focus {
 }
 .play-games .gaming-activities .gaming-activities-inner .single-activities .bottom-area .players-count .players-list li {
   display: inline-block;
-  border: 2px solid #252f5a;
+  border: 2px solid #0a3d62;
   margin-left: -12px;
   width: 30px;
   height: 30px;
@@ -2521,7 +2521,7 @@ select:focus {
   font-size: 10px;
   width: 25px;
   height: 25px;
-  background: #252f5a;
+  background: #0a3d62;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
   line-height: 25px;
@@ -3327,7 +3327,7 @@ select:focus {
   font-weight: 600;
   text-transform: uppercase;
   color: #FFF;
-  background: #252f5a;
+  background: #0a3d62;
   margin: 0px 5px;
 }
 .tournaments .info-table .main-box .inner-table-content .header-area ul .nav-item .nav-link.active {
@@ -4465,7 +4465,7 @@ select:focus {
 }
 .contact .contact-form-wrapper {
   padding-right: 65px;
-  background-color: #878781;;
+  background-color: #95afc0;;
 }
 
 .contact .contact-form-wrapper .contact-box {
@@ -4720,7 +4720,7 @@ select:focus {
 /* faq-section css end */
 /* login modal Area Start */
 .login-modal .modal-dialog .modal-content {
-  background: #252f5a;
+  background: #0a3d62;
   border-radius: 10px;
 }
 .login-modal .modal-dialog .modal-content .modal-body {
@@ -4737,7 +4737,7 @@ select:focus {
   width: 135px;
   height: 135px;
   border-radius: 50%;
-  background: #252f5a;
+  background: #0a3d62;
   top: -65px;
   left: 50%;
   -webkit-transform: translateX(-50%);

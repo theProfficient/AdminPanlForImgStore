@@ -17,7 +17,7 @@
     <style>
         /* Add your custom styles here */
         :root {
-            --blue: #252f5a;
+            --blue: #0a3d62; 
             --indigo: #6610f2;
             --purple: #6f42c1;
             --pink: #e83e8c;
@@ -30,7 +30,7 @@
             --white: #fff;
             --gray: #6c757d;
             --gray-dark: #343a40;
-            --primary: #252f5a;
+            --primary: #0a3d62;
             --secondary: #6c757d;
             --success: #28a745;
             --info: #17a2b8;
@@ -59,17 +59,18 @@
         }
     
         .header {
-            -webkit-text-size-adjust: 100%;
-            -webkit-tap-highlight-color: transparent;
-            font-family: var(--font-family-sans-serif);
-            font-size: 1.1rem;
-            font-weight: bold;
-            line-height: 3.5;
-            color: #fff; /* Change the text color to white */
-            text-align: left;
-            box-sizing: border-box;
-            display: block;
-        }
+        margin-bottom: 20px; /* Add margin at the bottom to create space */
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent;
+        font-family: var(--font-family-sans-serif);
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 3.5;
+        color: #fff; /* Change the text color to white */
+        text-align: left;
+        box-sizing: border-box;
+        display: block;
+    }
     
         .top-header,
         .mainmenu-area {
@@ -87,18 +88,18 @@
         #userDataTable {
             width: 100%;
             border-collapse: collapse;
-            background-color:rgb(39, 51, 84) 
+            background-color:#3c6382
         }
     
         #userDataTable thead {
-            background-color:#138496;
+            background-color:#0a3d62;
             color: white;
         }
     
         #userDataTable th,
         #userDataTable td {
             padding: 8px;
-            border: 1px solid white;
+            border: 1px solid black;
             color: white; /* Change the text color to white */
         }
         #editUserModal form {
@@ -117,7 +118,7 @@
     
 </head>
 
-<body style="background-color: #878781;;">
+<body style="background-color: #95afc0;;">
     <!-- preloader area start -->
     <div class="preloader" id="preloader">
         <div class="loader loader-1">
@@ -164,7 +165,7 @@
                                         <li class="nav-item dropdown">
                                             <a class="nav-link" href="index.html" role="button" aria-haspopup="true"
                                                 aria-expanded="false">
-                                                App View
+                                                APP VIEW
                                                 <div class="mr-hover-effect"></div>
                                             </a>
                                         </li>
@@ -172,7 +173,7 @@
                                         <li class="nav-item dropdown">
                                             <a class="nav-link" href="viewContainers.html" role="button"
                                                 aria-haspopup="true" aria-expanded="false">
-                                                VIEW Images
+                                                VIEW IMAGES
                                                 <div class="mr-hover-effect"></div>
                                             </a>
                                         </li>
@@ -180,7 +181,7 @@
                                         <li class="nav-item dropdown">
                                             <a class="nav-link" href="create.html" role="button" aria-haspopup="true"
                                                 aria-expanded="false">
-                                                Upload Images
+                                                UPLOAD IMAGES
                                                 <div class="mr-hover-effect"></div>
                                             </a>
                                         </li>
@@ -188,14 +189,14 @@
                                         <li class="nav-item dropdown">
                                             <a class="nav-link" href="deleteImages.html" role="button"
                                                 aria-haspopup="true" aria-expanded="false">
-                                                Delete Images
+                                                DELETE IMAGES
                                                 <div class="mr-hover-effect"></div>
                                             </a>
                                         </li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link" href="userData.html" role="button" aria-haspopup="true"
                                                 aria-expanded="false">
-                                                User Data
+                                                USER DATA
                                                 <div class="mr-hover-effect"></div>
                                             </a>
                                         </li>
@@ -232,31 +233,17 @@
                             <label for="editEmail">Email</label>
                             <input type="text" class="form-control" id="editEmail" name="email" required>
                         </div>
-                        <!-- <div class="form-group">
-                            <label for="editWhatsAppNumber">WhatsApp Number</label>
-                            <input type="text" class="form-control" id="editWhatsAppNumber" name="whatsAppNumber"
-                                required>
-                        </div> -->
+                   
                         <div class="form-group">
                             <label for="editRealMoney">Real Money</label>
                             <input type="text" class="form-control" id="editRealMoney" name="realMoney" required>
                         </div>
-                        <!-- <div class="form-group">
-                            <label for="editFacebookId">Facebook ID</label>
-                            <input type="text" class="form-control" id="editFacebookId" name="facebookId" readonly>
-                        </div> -->
-                        <!-- <div class="form-group">
-                            <label for="editInstaId">Instagram ID</label>
-                            <input type="text" class="form-control" id="editInstaId" name="instaId" readonly>
-                        </div> -->
+               
                         <div class="form-group">
                             <label for="editCredits">Credits</label>
                             <input type="text" class="form-control" id="editCredits" name="credits" required>
                         </div>
-                        <!-- <div class="form-group">
-                            <label for="editIsActive">Is Active</label>
-                            <input type="text" class="form-control" id="editIsActive" name="isActive" readonly>
-                        </div> -->
+                   
 
                         <button type="button" class="btn btn-primary" id="saveChangesBtn">Save Changes</button>
                     </form>
