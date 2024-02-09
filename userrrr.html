@@ -17,75 +17,13 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- responsive -->
     <link rel="stylesheet" href="assets/css/responsive.css">
+    
     <style>
- 
-        .container-table {
-            margin-top: 20px;
-        }
-
-        .container-table table {
-            border-color: black;
-            width: 100%; 
-            background-color:#3c6382
-         
-        }
-
-        .container-table th,
-        .container-table td {
-            text-align: center;
-            color: white;
-        }
-
-        .container-table td {
-            cursor: pointer;
-        }
-
-        .container-table img {
-            max-width: 100%;
-            height: auto;
-            margin-top: 10px;
-        }
-
-        .container-table thead th {
-            background-color: #0a3d62/* Change the background color of th */
-        }
-
-        #userDataTable {
-            width: 100%;
-            border-collapse: collapse;
-            background-color:#3c6382
-        }
-    
-        #userDataTable thead {
-            background-color:#0a3d62;
-            color: white;
-        }
-    
-        #userDataTable th,
-        #userDataTable td {
-            padding: 8px;
-            border: 1px solid black;
-            color: white; /* Change the text color to white */
-        }
-        #editUserModal form {
-        color: #000; /* Change the text color to black */
-    }
-
-    #editUserModal label {
-        color: #000; /* Change the label text color to black */
-    }
-
-    #editUserModal .modal-body {
-        max-height: calc(100vh - 200px);
-        overflow-y: auto;
-    }
-
-
-
+      
     </style>
 </head>
 
-
+<h1>table</h1>
 <body style="background-color: #95afc0;">
     <!-- preloader area start -->
     <div class="preloader" id="preloader">
@@ -181,8 +119,28 @@
         <!--Main-Menu Area Start-->
     </header>
     <!-- Header Area End -->
+    <h1>table of user</h1>
+    <table border="8">             
+        <!-- use table tag to show data in table so there is thead and tr , th -->
+        <thead>
+            <tr>
+            <th>UserId </th>
+            <th>Edit </th>
+            <th>UserName</th>
+            <th>Email </th>
+            <th>WhatsAppNub  </th>
+            <th>ReferralCode </th>
+            <th> RealMoney</th>
+            <th> FacebookId</th>
+            <th> InstaId</th>
+            <th> Credits</th>
+            <th> IsActive</th>
+            </tr>
+         </thead>
+         <tbody id="userData">
 
-  
+         </tbody>
+     </table>
 
     <!-- Your existing script imports here -->
     <script src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
@@ -194,7 +152,26 @@
     <script src="assets/js/mousemoveparallax.js"></script>
     <script src="assets/js/main.js"></script>
 
-   
+   <script>
+
+async function callApi(){
+    let data = await fetch('https://imagestoreazure.azurewebsites.net/getAllUser');    // no need to add method for get api use fetch directly fetch return promise in console 
+                       // so handle promise and change responce you async await after use this responce is changed but still data is in readable stream 
+       data = await data.json()        // use to retrive data and use again await here bcz it is also a promise with help of this now data of user will show in console
+       console.warn(data,"________data");  
+       document.getElementById('userData').innerHTML= data
+       .map((user)=> {          // use map to iterate 1 by 1 user
+        `<tr> </tr>`
+
+       })
+
+       }                                                                      
+    callApi()
+
+   </script>
+
+    
+
 </body>
 
 </html>

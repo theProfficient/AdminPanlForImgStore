@@ -145,13 +145,13 @@
                                                 <div class="mr-hover-effect"></div>
                                             </a>
                                         </li>
-                                        <!-- <li class="nav-item dropdown">
+                                        <li class="nav-item dropdown">
                                             <a class="nav-link" href="userrrr.html" role="button" aria-haspopup="true"
                                                 aria-expanded="false">
                                                 USER 
                                                 <div class="mr-hover-effect"></div>
                                             </a>
-                                        </li> -->
+                                        </li>
                                         
                                     </ul>
                                 </div>
@@ -277,10 +277,19 @@
                 }
 
                 $.each(data.images, function (index, imageUrl) {
-                    var img = $('<img>', { src: imageUrl, alt: 'Image' });
-                    imageModalBody.append(img);
-                });
+                  var img = $('<img>', { src: imageUrl, alt: 'Image' });
 
+                 var deleteIcon = $('<i>', { class: 'fas fa-trash-alt delete-icon', style: 'color: blue;' });
+
+                      // Attach click event handler to delete icon
+                  deleteIcon.click(function () {
+                      // Call the function to delete the image passing the image URL and container name
+                      deleteSingleImage(imageUrl, containerName);
+                        });
+
+                var imgContainer = $('<div class="image-container">').append(deleteIcon, img);
+                  imageModalBody.append(imgContainer);
+                             });
                 // Update modal title
                 $('#imageModalLabel').text("Images for Container - " + containerName);
 
@@ -302,8 +311,22 @@
         });
     }
 
-    // Fetch and populate the container table on page load
-    fetchAndPopulateContainerTable();
+    function deleteSingleImage(imageUrl, containerName) {
+    $.ajax({
+        url: `http://localhost:3001/deleteSingleImage?containerName=${containerName}&imageUrl=${imageUrl}`,
+        type: 'DELETE',
+        success: function (response) {
+            alert("Image deleted successfully");
+            fetchAndDisplayImages(containerName);
+        },
+        error: function (xhr, status, error) {
+            alert("Error deleting image");
+        }
+    });
+}
+
+       // Fetch and populate the container table on page load
+       fetchAndPopulateContainerTable();
 </script>
 </body>
 
