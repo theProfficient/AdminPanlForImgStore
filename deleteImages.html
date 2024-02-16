@@ -147,58 +147,57 @@
                         <div class="row">
                             
     <!------------------delete Container Box -------------->
-
+<!-- 
     <div class="col-md-4 mb-4">
         <div class="contact-box">
             <h4 class="title"> Delete Category</h4>
             <div id="deleteContainerName">
                 <select class="input-field" name="container" required>
-                    <!-- Options will be dynamically added here -->
+                  
                 </select>
                 <button type="button" class="mybtn1" id="deleteContainerBtn"
                 style="width: 140px; height: 45px; font-size: 12px; text-align:center; background: #1ed6d6;">Delete</button>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
 
     <!------------------delete Container Box -------------->
-    <div class="col-md-4 mb-4">
+    <!-- <div class="col-md-4 mb-4">
         <div class="contact-box">
             <h4 class="title"> Delete Container</h4>
             <div id="deleteContainerName">
                 <select class="input-field" name="container" required>
-                    <!-- Options will be dynamically added here -->
+                
                 </select>
                 <button type="button" class="mybtn1" id="deleteContainerBtn"
                 style="width: 140px; height: 45px; font-size: 12px; text-align:center; background: #1ed6d6;">Delete</button>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
         <!------------------ delete all Images of container ------------------->
-        <div class="col-md-4 mb-4">
-            <div class="contact-box">
-                <h4 class="title">
-                    Delete Images
-                </h4>
-                <form id="deleteContainerForm">
-                    <div>
-                        <select class="input-field" name="container" required>
-                            <!-- Options will be dynamically added here -->
-                        </select>
-                        <button type="submit" class="mybtn1"
-                        style="width: 140px; height: 45px; font-size: 12px; text-align:center; background: #1ed6d6;">Delete</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+        <section class="contact" style="background-color: #95afc0; display: flex; justify-content: center; align-items: center; height: 100vh;">
+            <div class="col-lg-4 col-md-6">
+                <div class="contact-box">
+                    <h4 class="title">
+                        Delete Images
+                    </h4>
+                    <form id="deleteContainerForm">
+                        <div>
+                            <select class="input-field" name="container" required>
+                                <!-- Options will be dynamically added here -->
+                            </select>
+                            <button type="submit" class="mybtn1"
+                            style="width: 140px; height: 45px; font-size: 12px; text-align:center; background: #1ed6d6;">Delete</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+        
     <!-- Contact Area End -->
 
      <!-- Your existing script imports here -->
@@ -226,7 +225,7 @@
         });
     </script>
 
-    <!---------------------- delete container -------->
+    <!--------------------------------------- delete container -------->
     <script>
         $(document).ready(function () {
             // Function to fetch and populate container names
@@ -263,8 +262,9 @@
             function deleteContainer(containerName) {
                 $.ajax({
                     type: "DELETE",
-                    url: "http://localhost:3001/deleteContainerByAdmin?containerName=" + containerName,
+                    url: "https://imagestoreazure.azurewebsites.net/deleteContainerByAdmin?containerName=" + containerName,
                     success: function (response) {
+                        console.log(response,"________response");
                         console.log("Container deleted successfully:", response);
                         window.alert("Container successfully deleted");
                         // Fetch updated container names after deletion
