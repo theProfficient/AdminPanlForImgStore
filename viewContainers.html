@@ -231,7 +231,7 @@
     <script>
         // Function to fetch and populate container table
         function fetchAndPopulateContainerTable() {
-        $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
+        $.get("http://localhost:3001/getAllContainerNames", function (data) {
             var containerTableBody = $('#containerTableBody');
             containerTableBody.empty(); // Clear existing rows
 
@@ -264,7 +264,7 @@
     // Function to fetch and display images for the selected container
     function fetchAndDisplayImages(containerName) {
         $.ajax({
-            url: "https://imagestoreazure.azurewebsites.net/getContainersAsPerName?containerName=" + containerName,
+            url: "http://localhost:3001/getContainersAsPerName?containerName=" + containerName,
             type: 'GET',
             success: function (data) {
                 var imageModalBody = $('#imageModalBody');

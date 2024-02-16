@@ -241,84 +241,98 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Fetch data from the API
-            fetch('https://imagestoreazure.azurewebsites.net/getAllCategories')
+            fetch('http://localhost:3001/getAllCategories')
                 .then(response => response.json())
                 .then(data => {
                     // Check if the API response is successful
+                    console.log(data, "_______data");
+
                     if (data.status === true) {
                         // Get the table body where you want to display the categories
                         var categoryTableBody = document.getElementById('containerTableBody');
 
-                        // Loop through the data and create table rows
-                        data.data.forEach(function (category, index) {
-                            // Create a table row for category
-                            var categoryRow = document.createElement('tr');
+                        // Loop through the data and create table rows for each category
+                        data.data.forEach(function (categoryArray, index) {
+                            // If categoryArray is not an array or empty, skip
+                            if (!Array.isArray(categoryArray) || categoryArray.length === 0) {
+                                return;
+                            }
 
-                            // Create a table cell for serial number
-                            var serialNumberCell = document.createElement('td');
-                            serialNumberCell.innerText = index + 1; // Serial number
-                            categoryRow.appendChild(serialNumberCell);
+                            // Loop through the categoryArray and create a table row for each category
+                            categoryArray.forEach(function (category, index) {
+                                // Create a table row for category
+                                var categoryRow = document.createElement('tr');
 
-                            // Create a table cell for category
-                            var categoryCell = document.createElement('td');
+                                // Create a table cell for serial number
+                                var serialNumberCell = document.createElement('td');
+                                serialNumberCell.innerText = index + 1; // Serial number
+                                categoryRow.appendChild(serialNumberCell);
 
-                            // Create a larger flower-shaped button using SVG
-                            var flowerButton = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-                            flowerButton.setAttribute("width", "80");
-                            flowerButton.setAttribute("height", "80");
-                            flowerButton.innerHTML = `
-                                <circle cx="40" cy="40" r="38" fill="#0c1e68" />
-                                <text x="50%" y="50%" font-size="14" fill="#fff" text-anchor="middle" dy=".3em">${category}</text>
-                            `;
+                                // Create a table cell for category
+                                var categoryCell = document.createElement('td');
 
-                            // Add box shadow effect
-                            flowerButton.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
+                                // Create a larger flower-shaped button using SVG
+                                var flowerButton = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                                flowerButton.setAttribute("width", "80");
+                                flowerButton.setAttribute("height", "80");
+                                flowerButton.innerHTML = `
+                                    <circle cx="40" cy="40" r="38" fill="#0c1e68" />
+                                    <text x="50%" y="50%" font-size="14" fill="#fff" text-anchor="middle" dy=".3em">${category}</text>
+                                `;
 
-                            // Append the flower-shaped button to the category cell
-                            categoryCell.appendChild(flowerButton);
-                            categoryRow.appendChild(categoryCell);
+                                // Add box shadow effect
+                                flowerButton.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
 
-                            // Create a table cell for container names
-                            var containerNamesCell = document.createElement('td');
-                            containerNamesCell.style.whiteSpace = 'nowrap'; // Prevent line break
-                            categoryRow.appendChild(containerNamesCell);
+                                // Append the flower-shaped button to the category cell
+                                categoryCell.appendChild(flowerButton);
+                                categoryRow.appendChild(categoryCell);
 
-                            // Create a button for "Containers" for each category
-                            var containersButton = document.createElement('button');
-                            containersButton.innerText = 'Click';
-                            containersButton.className = 'btn btn-primary flower-button';
-                            containersButton.style.marginTop = '10px';
-                            containersButton.style.marginLeft = 'auto';
-                            containersButton.style.marginRight = 'auto';
-                            containersButton.style.display = 'block';
+                                // Create a table cell for container names
+                                var containerNamesCell = document.createElement('td');
+                                containerNamesCell.style.whiteSpace = 'nowrap'; // Prevent line break
+                                categoryRow.appendChild(containerNamesCell);
 
-                            // Add click event to fetch container data and display container names
-                            containersButton.addEventListener('click', function () {
-                                fetch(`https://imagestoreazure.azurewebsites.net/getAllContainerAsPerSequence?indexNumber=${index + 1}`)
-                                    .then(response => response.json())
-                                    .then(containerData => {
-                                        // Check if the API response is successful
-                                        if (containerData.category) {
-                                            // Extract container names
-                                            var containerNames = containerData.category.map(container => container.containerName).join(', ');
-                                            // Display container names in the "Containers of categories" column
-                                            containerNamesCell.innerText = containerNames;
-                                        }
-                                    })
-                                    .catch(error => console.error('Error fetching container data:', error));
+                                // Create a button for "Containers" for each category
+                                var containersButton = document.createElement('button');
+                                containersButton.innerText = 'Click';
+                                containersButton.className = 'btn btn-primary flower-button';
+                                containersButton.style.marginTop = '10px';
+                                containersButton.style.marginLeft = 'auto';
+                                containersButton.style.marginRight = 'auto';
+                                containersButton.style.display = 'block';
+
+                                // Add click event to fetch container data and display container names
+                                containersButton.addEventListener('click', function () {
+                                    var categoryIndex = index; // Use the categoryIndex directly
+                                    console.log(categoryIndex, "______categoryIndex");
+                                    // Fetch container data for the specific category index
+                                    fetch(`http://localhost:3001/getAllContainerAsPerSequence?indexNumber=${categoryIndex}`)
+                                        .then(response => response.json())
+                                        .then(containerData => {
+                                            // Check if the API response is successful
+                                            if (containerData.category) {
+                                                // Extract container names
+                                                var containerNames = containerData.category.map(container => container.containerName).join(', ');
+                                                // Display container names in the "Containers of categories" column
+                                                containerNamesCell.innerText = containerNames;
+                                            }
+                                        })
+                                        .catch(error => console.error('Error fetching container data:', error));
+                                });
+
+                                // Append the "Containers" button to the category row
+                                categoryRow.appendChild(containersButton);
+
+                                // Append the category row to the table body
+                                categoryTableBody.appendChild(categoryRow);
                             });
-
-                            // Append the "Containers" button to the category row
-                            categoryRow.appendChild(containersButton);
-
-                            // Append the category row to the table body
-                            categoryTableBody.appendChild(categoryRow);
                         });
                     }
                 })
                 .catch(error => console.error('Error fetching data:', error));
         });
     </script>
+
 
 </body>
 

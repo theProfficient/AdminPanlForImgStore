@@ -264,7 +264,7 @@
 
         // Function to create a category
         function createCategory(categoryName) {
-            $.get("https://imagestoreazure.azurewebsites.net/createCategories?subcategoryName=" + categoryName)
+            $.get("http://localhost:3001/createCategories?subcategoryName=" + categoryName)
                 .done(function (data) {
                     console.log("Category created successfully:", data);
                     alert("Category created successfully: " + categoryName);
@@ -299,23 +299,30 @@
 </script>
 
 
-
 <!-------------------------------- create containers in category -------------------------------->
 <script>
     $(document).ready(function () {
         // Function to fetch and populate categories
         function fetchCategories() {
-            $.get("https://imagestoreazure.azurewebsites.net/getAllCategories", function (data) {
+            $.get("http://localhost:3001/getAllCategories", function (data) {
                 var categoryDropdown = $('#categoryDropdown');
+                console.log(data, "___________data");
                 categoryDropdown.empty();
-                $.each(data.data, function (index, value) {
-                    categoryDropdown.append($('<option>', {
-                        value: value,
-                        text: value
-                    }));
-                });
 
-                console.log("Categories fetched:", data.data);
+                if (data.status && Array.isArray(data.data) && data.data.length > 0) {
+                    var categories = data.data[0];
+                    console.log(categories, "__________categories");
+
+
+                    $.each(categories, function (index, value) {
+                        categoryDropdown.append($('<option>', {
+                            value: value,
+                            text: value
+                        }));
+                    });
+
+                    console.log("Categories fetched:", categories);
+                }
             });
         }
 
@@ -345,7 +352,7 @@
             console.log(updatedContainerName, "____________updatedContainerName");
 
             $.ajax({
-                url: "https://imagestoreazure.azurewebsites.net/updateCategories?subcategoryName=" + selectedCategory + "&containerName=" + updatedContainerName,
+                url: "http://localhost:3001/updateCategories?subcategoryName=" + selectedCategory + "&containerName=" + updatedContainerName,
                 type: 'PUT', // Use PUT method
                 success: function (data) {
                     console.log("Categories updated successfully:", data);
@@ -353,22 +360,23 @@
                     if (data.status) {
                         // If the response has status true, show success message
                         alert("Category updated successfully. Container \"" + updatedContainerName + "\" created successfully.");
+                        // Clear the input
+                        $('#createContainerName').val('');
                     } else {
                         // If the response has status false, show container already present message
                         alert("This container is already present in " + selectedCategory + " category.");
                     }
                 },
-                error: function (xhr, status, error) {
-                    console.error("Error updating categories:", error.responseJSON.error);
+                error: function(xhr, status, error) {
+    console.error("Error updating categories:", error);
 
-                    if (xhr.status === 400) {
-                        // If the status is 400, show container already present message
-                        alert("This container is already present in " + selectedCategory + " category.");
-                    } else {
-                        // For other errors, show a generic error message
-                        alert("Error updating categories. Please try again.");
-                    }
-                }
+    if (xhr.status === 400 && xhr.responseJSON && xhr.responseJSON.status === false) {
+        alert(xhr.responseJSON.message);
+    } else {
+        alert("Error updating categories. Please try again.");
+    }
+}
+
             });
         }
 
@@ -388,19 +396,13 @@
 </script>
 
 
-
-
-
-
-
 <!-- ----------------------------------------upload iamge box------------------------------------------- -->
-
 
     <script>
         $(document).ready(function () {
             // Function to fetch and populate container names
             function fetchContainerNames() {
-                $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
+                $.get("http://localhost:3001/getAllContainerNames", function (data) {
                     var containerSelect = $('select[name="container"]');
                     containerSelect.empty(); 
                     $.each(data, function (index, value) {

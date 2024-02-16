@@ -231,7 +231,7 @@
         $(document).ready(function () {
             // Function to fetch and populate container names
             function fetchContainerNames() {
-                $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
+                $.get("http://localhost:3001/getAllContainerNames", function (data) {
                     var containerSelect = $('select[name="container"]');
                     containerSelect.empty(); // Clear existing options
                     $.each(data, function (index, value) {
@@ -263,7 +263,7 @@
             function deleteContainer(containerName) {
                 $.ajax({
                     type: "DELETE",
-                    url: "https://imagestoreazure.azurewebsites.net/deleteContainerByAdmin?containerName=" + containerName,
+                    url: "http://localhost:3001/deleteContainerByAdmin?containerName=" + containerName,
                     success: function (response) {
                         console.log("Container deleted successfully:", response);
                         window.alert("Container successfully deleted");
