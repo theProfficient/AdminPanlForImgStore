@@ -306,13 +306,13 @@
                                     var categoryIndex = index; // Use the categoryIndex directly
                                     console.log(categoryIndex, "______categoryIndex");
                                     // Fetch container data for the specific category index
-                                    fetch(`http://localhost:3001/getAllContainerAsPerSequence?indexNumber=${categoryIndex}`)
+                                    fetch(`http://localhost:3001/getAllContainersFromMongoDb?indexNumber=${categoryIndex}`)
                                         .then(response => response.json())
                                         .then(containerData => {
                                             // Check if the API response is successful
                                             if (containerData.category) {
                                                 // Extract container names
-                                                var containerNames = containerData.category.map(container => container.containerName).join(', ');
+                                                var containerNames = containerData.category
                                                 // Display container names in the "Containers of categories" column
                                                 containerNamesCell.innerText = containerNames;
                                             }
