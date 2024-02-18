@@ -241,7 +241,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Fetch data from the API
-            fetch('http://localhost:3001/getAllCategories')
+            fetch('https://imagestoreazure.azurewebsites.net/getAllCategories')
                 .then(response => response.json())
                 .then(data => {
                     // Check if the API response is successful
@@ -306,7 +306,7 @@
                                     var categoryIndex = index; // Use the categoryIndex directly
                                     console.log(categoryIndex, "______categoryIndex");
                                     // Fetch container data for the specific category index
-                                    fetch(`http://localhost:3001/getAllContainersFromMongoDb?indexNumber=${categoryIndex}`)
+                                    fetch(`https://imagestoreazure.azurewebsites.net/getAllContainersFromMongoDb?indexNumber=${categoryIndex}`)
                                         .then(response => response.json())
                                         .then(containerData => {
                                             // Check if the API response is successful

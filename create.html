@@ -264,7 +264,7 @@
 
         // Function to create a category
         function createCategory(categoryName) {
-            $.get("http://localhost:3001/createCategories?subcategoryName=" + categoryName)
+            $.get("https://imagestoreazure.azurewebsites.net/createCategories?subcategoryName=" + categoryName)
                 .done(function (data) {
                     console.log("Category created successfully:", data);
                     alert("Category created successfully: " + categoryName);
@@ -304,7 +304,7 @@
     $(document).ready(function () {
         // Function to fetch and populate categories
         function fetchCategories() {
-            $.get("http://localhost:3001/getAllCategories", function (data) {
+            $.get("https://imagestoreazure.azurewebsites.net/getAllCategories", function (data) {
                 var categoryDropdown = $('#categoryDropdown');
                 console.log(data, "___________data");
                 categoryDropdown.empty();
@@ -352,7 +352,7 @@
             console.log(updatedContainerName, "____________updatedContainerName");
 
             $.ajax({
-                url: "http://localhost:3001/updateCategories?subcategoryName=" + selectedCategory + "&containerName=" + updatedContainerName,
+                url: "https://imagestoreazure.azurewebsites.net/updateCategories?subcategoryName=" + selectedCategory + "&containerName=" + updatedContainerName,
                 type: 'PUT', // Use PUT method
                 success: function (data) {
                     console.log("Categories updated successfully:", data);
@@ -402,7 +402,7 @@
         $(document).ready(function () {
             // Function to fetch and populate container names
             function fetchContainerNames() {
-                $.get("http://localhost:3001/getAllContainerNames", function (data) {
+                $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
                     var containerSelect = $('select[name="container"]');
                     containerSelect.empty(); 
                     $.each(data, function (index, value) {

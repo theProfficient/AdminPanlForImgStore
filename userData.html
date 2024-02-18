@@ -235,8 +235,8 @@
                         </div>
                    
                         <div class="form-group">
-                            <label for="editRealMoney">Real Money</label>
-                            <input type="text" class="form-control" id="editRealMoney" name="realMoney" required>
+                            <!-- <label for="editRealMoney">Real Money</label> -->
+                            <!-- <input type="text" class="form-control" id="editRealMoney" name="realMoney" required> -->
                         </div>
                
                         <div class="form-group">
@@ -266,7 +266,7 @@
                         <th>Email</th>
                         <th>WhatsAppNub</th>
                         <th>ReferralCode</th>
-                        <th>RealMoney</th>
+                        <!-- <th>RealMoney</th> -->
                         <th>FacebookId</th>
                         <th>InstaId</th>
                         <th>Credits</th>
@@ -294,7 +294,7 @@
             $('#editUserName').val(user.userName);
             $('#editEmail').val(user.email);
             $('#editWhatsAppNumber').val(user.whatsAppNumber);
-            $('#editRealMoney').val(user.realMoney);
+            // $('#editRealMoney').val(user.realMoney);
             $('#editFacebookId').val(user.facebookId);
             $('#editInstaId').val(user.instaId);
             $('#editCredits').val(user.credits);
@@ -314,7 +314,7 @@
                         '<td>' + user.email + '</td>' +
                         '<td>' + user.whatsAppNumber + '</td>' +
                         '<td>' + user.referralCode + '</td>' +
-                        '<td>' + user.realMoney + '</td>' +
+                        // '<td>' + user.realMoney + '</td>' +
                         '<td>' + user.facebookId + '</td>' +
                         '<td>' + user.instaId + '</td>' +
                         '<td>' + user.credits + '</td>' +
@@ -343,7 +343,7 @@
             userName: $('#editUserName').val(),
             email: $('#editEmail').val(),
             // whatsAppNumber: $('#editWhatsAppNumber').val(),
-            realMoney: $('#editRealMoney').val(),
+            // realMoney: $('#editRealMoney').val(),
             // facebookId: $('#editFacebookId').val(),
             // instaId: $('#editInstaId').val(),
             credits: $('#editCredits').val(),
@@ -356,10 +356,10 @@
             return;
          }
 
-         if(!isNumericAndGreaterThanZero(editedUserData.realMoney)){
-            alert("please enter valid value for realMoney & must be greater than zero");
-            return;
-         }
+        //  if(!isNumericAndGreaterThanZero(editedUserData.realMoney)){
+        //     alert("please enter valid value for realMoney & must be greater than zero");
+        //     return;
+        //  }
        
          if(!isNumericAndGreaterThanZero(editedUserData.credits)){
             alert("please enter valid value for credits & must be greater than zero")

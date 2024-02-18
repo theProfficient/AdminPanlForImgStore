@@ -230,7 +230,7 @@
         $(document).ready(function () {
             // Function to fetch and populate container names
             function fetchContainerNames() {
-                $.get("http://localhost:3001/getAllContainerNames", function (data) {
+                $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
                     var containerSelect = $('select[name="container"]');
                     containerSelect.empty(); // Clear existing options
                     $.each(data, function (index, value) {
