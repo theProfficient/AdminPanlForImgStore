@@ -312,8 +312,11 @@
     }
 
     function deleteSingleImage(imageUrl, containerName) {
+    // Extract image name from the URL
+    var imageName = imageUrl.split('/').pop();
+
     $.ajax({
-        url: `https://imagestoreazure.azurewebsites.net/deleteSingleImage?containerName=${containerName}&imageUrl=${imageUrl}`,
+        url: `https://imagestoreazure.azurewebsites.net/deleteSingleImage?containerName=${containerName}&imageUrl=${imageName}`,
         type: 'DELETE',
         success: function (response) {
             alert("Image deleted successfully");

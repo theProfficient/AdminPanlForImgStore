@@ -303,28 +303,26 @@
 <script>
     $(document).ready(function () {
         // Function to fetch and populate categories
-        function fetchCategories() {
-            $.get("https://imagestoreazure.azurewebsites.net/getAllCategories", function (data) {
-                var categoryDropdown = $('#categoryDropdown');
-                console.log(data, "___________data");
-                categoryDropdown.empty();
+   // Function to fetch and populate categories
+function fetchCategories() {
+    $.get("https://imagestoreazure.azurewebsites.net/getAllCategoriesForApp", function (data) {
+        var categoryDropdown = $('#categoryDropdown');
+        categoryDropdown.empty();
 
-                if (data.status && Array.isArray(data.data) && data.data.length > 0) {
-                    var categories = data.data[0];
-                    console.log(categories, "__________categories");
-
-
-                    $.each(categories, function (index, value) {
-                        categoryDropdown.append($('<option>', {
-                            value: value,
-                            text: value
-                        }));
-                    });
-
-                    console.log("Categories fetched:", categories);
-                }
+        if (data.status && typeof data.data === "string") {
+            // Split the string into an array of categories
+            var categories = data.data.split(",");
+            $.each(categories, function (index, value) {
+                categoryDropdown.append($('<option>', {
+                    value: value,
+                    text: value
+                }));
             });
+
+            console.log("Categories fetched:", categories);
         }
+    });
+}
 
         // Event listener for the Fetch Categories button
         $('#fetchCategoriesBtn').on('click', function () {

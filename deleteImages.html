@@ -146,41 +146,42 @@
 
                         <div class="row">
                             
-    <!------------------delete Container Box -------------->
-<!-- 
+    <!------------------delete Category Box -------------->
+
     <div class="col-md-4 mb-4">
         <div class="contact-box">
             <h4 class="title"> Delete Category</h4>
-            <div id="deleteContainerName">
-                <select class="input-field" name="container" required>
+            <div id="deleteCategoryName">
+                <select class="input-field" name="category" required>
                   
                 </select>
-                <button type="button" class="mybtn1" id="deleteContainerBtn"
+                <button type="button" class="mybtn1" id="deleteCategoryBtn"
                 style="width: 140px; height: 45px; font-size: 12px; text-align:center; background: #1ed6d6;">Delete</button>
             </div>
         </div>
-    </div> -->
+    </div>
 
 
 
-    <!------------------delete Container Box -------------->
-    <!-- <div class="col-md-4 mb-4">
+    <!------------------delete whole Container Box -------------->
+
+    <div class="col-md-4 mb-4">
         <div class="contact-box">
             <h4 class="title"> Delete Container</h4>
-            <div id="deleteContainerName">
-                <select class="input-field" name="container" required>
+            <div id="deleteWholeContainerName">
+                <select class="input-field" name="wholeContainer" required>
                 
                 </select>
-                <button type="button" class="mybtn1" id="deleteContainerBtn"
+                <button type="button" class="mybtn1" id="deleteWholeContainerBtn"
                 style="width: 140px; height: 45px; font-size: 12px; text-align:center; background: #1ed6d6;">Delete</button>
             </div>
         </div>
-    </div> -->
+    </div>
 
 
         <!------------------ delete all Images of container ------------------->
-        <section class="contact" style="background-color: #95afc0; display: flex; justify-content: center; align-items: center; height: 100vh;">
-            <div class="col-lg-4 col-md-6">
+
+            <div class="col-md-4 mb-4">
                 <div class="contact-box">
                     <h4 class="title">
                         Delete Images
@@ -225,7 +226,143 @@
         });
     </script>
 
-    <!--------------------------------------- delete container -------->
+
+    <!------------------------------------ delete categories --------------------->
+    <script>
+        $(document).ready(function () {
+            // Function to fetch and populate category names
+            function fetchCategoryNames() {
+                $.get("https://imagestoreazure.azurewebsites.net/getAllCategoriesForApp", function (response) {
+                    var categorySelect = $('select[name="category"]');
+                    categorySelect.empty(); // Clear existing options
+        
+                    if (response.status && response.data && response.data.length > 0) {
+                        var categories = response.data.split(',');
+                        categories.forEach(function (category) {
+                            categorySelect.append($('<option>', {
+                                value: category,
+                                text: category
+                            }));
+                        });
+                        console.log("category names fetched:", categories);
+                    } else {
+                        // If no categories found, add "No categories found" option
+                        categorySelect.append($('<option>', {
+                            value: "",
+                            text: "No categories found"
+                        }));
+                    }
+                });
+            }
+        
+            // Fetch category names initially
+            fetchCategoryNames();
+        
+            // Event listener for the delete category button
+            $('#deleteCategoryBtn').on('click', function () {
+                var categoryName = $('#deleteCategoryName select[name="category"]').val();
+        
+                if (categoryName === "") {
+                    alert("No categories found.");
+                } else {
+                    deleteCategory(categoryName);
+                }
+            });
+        
+            // Function to delete a category
+            function deleteCategory(categoryName) {
+                $.ajax({
+                    type: "DELETE",
+                    url: "https://imagestoreazure.azurewebsites.net/deleteCategory?category=" + categoryName, // Corrected URL
+                    success: function (response) {
+                        console.log(response, "________response");
+                        if(response.status && response.message === "No categories found") {
+                            alert("No categories found.");
+                        } else {
+                            console.log("category deleted successfully:", response);
+                            window.alert("category successfully deleted");
+                            // Fetch updated container names after deletion
+                            fetchCategoryNames();
+                        }
+                    },
+                    error: function (error) {
+                        console.error("Error deleting category:", error.responseJSON.error);
+                        alert("Error deleting category: " + error.responseJSON.error);
+                    }
+                });
+            }
+        
+            document.getElementById("deleteCategoryName").addEventListener("submit", function () {
+                setTimeout(function () {
+                    document.getElementById("deleteCategoryName").reset();
+                }, 1000);
+            });
+        });
+    </script>
+<!----------------------------------------------- delete whole container ---------------------------->
+
+<script>
+    $(document).ready(function () {
+        // Function to fetch and populate container names
+        function fetchContainerNames() {
+            $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
+                var containerSelect = $('select[name="wholeContainer"]');
+                console.log(containerSelect,"_________containerSelect");
+                containerSelect.empty(); // Clear existing options
+                $.each(data, function (index, value) {
+                    containerSelect.append($('<option>', {
+                        value: value,
+                        text: value
+                    }));
+                });
+
+                console.log("Containers names fetched:", data);
+            });
+        }
+
+        // Fetch container names initially
+        fetchContainerNames();
+
+
+        // Event listener for the delete Container button
+        $('#deleteWholeContainerBtn').on('click', function () {
+            var containerName = $('#deleteWholeContainerName select[name="wholeContainer"]').val();
+
+            if (containerName === "") {
+                alert("Please select a container.");
+            } else {
+                deleteWholeContainer(containerName);
+            }
+        });
+        // Function to delete a category
+        function deleteWholeContainer(containerName) {
+            $.ajax({
+                type: "DELETE",
+                url: "https://imagestoreazure.azurewebsites.net/deleteContainerByAdmin?containerName=" + containerName,
+                success: function (response) {
+                    console.log(response, "________response");
+                    console.log("container deleted successfully:", response);
+                    window.alert("container successfully deleted");
+                    // Fetch updated container names after deletion
+                    fetchContainerNames();
+                },
+                error: function (error) {
+                    console.error("Error deleting container:", error.responseJSON.error);
+                    alert("Error deleting container: " + error.responseJSON.error);
+                }
+            });
+        }
+
+        document.getElementById("deleteWholeContainerName").addEventListener("submit", function () {
+            setTimeout(function () {
+                document.getElementById("deleteWholeContainerName").reset();
+            }, 1000);
+        });
+    });
+</script>
+
+
+    <!--------------------------------------- delete container all images only  ------------------->
     <script>
         $(document).ready(function () {
             // Function to fetch and populate container names
@@ -316,6 +453,10 @@
         });
     </script>
     <!-- <script src="assets/js/main.js"></script> -->
+
+
+
+
 </body>
 
 </html>
