@@ -302,85 +302,94 @@
 <!----------------------------------------------- delete whole container ---------------------------->
 
 <script>
-    $(document).ready(function () {
-        // Function to fetch and populate container names
-        function fetchContainerNames() {
-            $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
-                var containerSelect = $('select[name="wholeContainer"]');
-                console.log(containerSelect,"_________containerSelect");
-                containerSelect.empty(); // Clear existing options
-                $.each(data, function (index, value) {
+  $(document).ready(function () {
+    // Function to fetch and populate container names
+    function fetchContainerNames() {
+        $.get("http://localhost:3001/getAllContainerNamesfromMongo", function (data) {
+            var containerSelect = $('select[name="wholeContainer"]');
+            console.log(containerSelect, "_________containerSelect");
+            containerSelect.empty(); // Clear existing options
+            if (data.containers && Array.isArray(data.containers) && data.containers.length > 0) {
+                $.each(data.containers, function (index, value) {
                     containerSelect.append($('<option>', {
                         value: value,
                         text: value
                     }));
                 });
 
-                console.log("Containers names fetched:", data);
-            });
-        }
-
-        // Fetch container names initially
-        fetchContainerNames();
-
-
-        // Event listener for the delete Container button
-        $('#deleteWholeContainerBtn').on('click', function () {
-            var containerName = $('#deleteWholeContainerName select[name="wholeContainer"]').val();
-
-            if (containerName === "") {
-                alert("Please select a container.");
+                console.log("Containers names fetched:", data.containers);
             } else {
-                deleteWholeContainer(containerName);
+                console.log("No containers found.");
             }
         });
-        // Function to delete a category
-        function deleteWholeContainer(containerName) {
-            $.ajax({
-                type: "DELETE",
-                url: "https://imagestoreazure.azurewebsites.net/deleteContainerByAdmin?containerName=" + containerName,
-                success: function (response) {
-                    console.log(response, "________response");
-                    console.log("container deleted successfully:", response);
-                    window.alert("container successfully deleted");
-                    // Fetch updated container names after deletion
-                    fetchContainerNames();
-                },
-                error: function (error) {
-                    console.error("Error deleting container:", error.responseJSON.error);
-                    alert("Error deleting container: " + error.responseJSON.error);
-                }
-            });
-        }
+    }
 
-        document.getElementById("deleteWholeContainerName").addEventListener("submit", function () {
-            setTimeout(function () {
-                document.getElementById("deleteWholeContainerName").reset();
-            }, 1000);
-        });
+    // Fetch container names initially
+    fetchContainerNames();
+
+    // Event listener for the delete Container button
+    $('#deleteWholeContainerBtn').on('click', function () {
+        var containerName = $('#deleteWholeContainerName select[name="wholeContainer"]').val();
+
+        if (containerName === "") {
+            alert("Please select a container.");
+        } else {
+            deleteWholeContainer(containerName);
+        }
     });
+
+    // Function to delete a category
+    function deleteWholeContainer(containerName) {
+        $.ajax({
+            type: "DELETE",
+            url: "https://imagestoreazure.azurewebsites.net/deleteContainerByAdmin?containerName=" + containerName,
+            success: function (response) {
+                console.log(response, "________response");
+                console.log("container deleted successfully:", response);
+                window.alert("container successfully deleted");
+                // Fetch updated container names after deletion
+                fetchContainerNames();
+            },
+            error: function (error) {
+                console.error("Error deleting container:", error.responseJSON.error);
+                alert("Error deleting container: " + error.responseJSON.error);
+            }
+        });
+    }
+
+    document.getElementById("deleteWholeContainerName").addEventListener("submit", function () {
+        setTimeout(function () {
+            document.getElementById("deleteWholeContainerName").reset();
+        }, 1000);
+    });
+});
+
 </script>
 
 
     <!--------------------------------------- delete container all images only  ------------------->
     <script>
-        $(document).ready(function () {
-            // Function to fetch and populate container names
-            function fetchContainerNames() {
-                $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
-                    var containerSelect = $('select[name="container"]');
-                    containerSelect.empty(); // Clear existing options
-                    $.each(data, function (index, value) {
-                        containerSelect.append($('<option>', {
-                            value: value,
-                            text: value
-                        }));
-                    });
-
-                    console.log("Containers names fetched:", data);
+  $(document).ready(function () {
+    // Function to fetch and populate container names
+    function fetchContainerNames() {
+        $.get("http://localhost:3001/getAllContainerNamesfromMongo", function (data) {
+            var containerSelect = $('select[name="container"]');
+            console.log(containerSelect, "_________containerSelect");
+            containerSelect.empty(); // Clear existing options
+            if (data.containers && Array.isArray(data.containers) && data.containers.length > 0) {
+                $.each(data.containers, function (index, value) {
+                    containerSelect.append($('<option>', {
+                        value: value,
+                        text: value
+                    }));
                 });
-            }
 
+                console.log("Containers names fetched:", data.containers);
+            } else {
+                console.log("No containers found.");
+            }
+        });
+    }
             // Fetch container names initially
             fetchContainerNames();
 

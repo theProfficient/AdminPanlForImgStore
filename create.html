@@ -396,69 +396,76 @@ function fetchCategories() {
 
 <!-- ----------------------------------------upload iamge box------------------------------------------- -->
 
-    <script>
-        $(document).ready(function () {
-            // Function to fetch and populate container names
-            function fetchContainerNames() {
-                $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
-                    var containerSelect = $('select[name="container"]');
-                    containerSelect.empty(); 
-                    $.each(data, function (index, value) {
+<script>
+    $(document).ready(function () {
+        // Function to fetch and populate container names
+        function fetchContainerNames() {
+            $.get("http://localhost:3001/getAllContainerNamesfromMongo", function (data) {
+                var containerSelect = $('select[name="container"]');
+                containerSelect.empty(); // Clear existing options
+
+                // Check if the response contains containers array
+                if (data.containers && Array.isArray(data.containers)) {
+                    // Loop through the containers array and add options to the dropdown
+                    data.containers.forEach(function (container) {
                         containerSelect.append($('<option>', {
-                            value: value,
-                            text: value
+                            value: container,
+                            text: container
                         }));
                     });
+                }
 
-                    console.log("Containers names fetched:", data);
-                });
-            }
-
-            // Fetch container names on button click
-            $('#fetchContainers').on('click', function () {
-                fetchContainerNames();
+                console.log("Containers names fetched:", data);
             });
+        }
 
-            // Fetch container names initially
+        // Fetch container names on button click
+        $('#fetchContainers').on('click', function () {
             fetchContainerNames();
+        });
 
-            // Handle form submission
-            $("#myForm").submit(function (e) {
-                e.preventDefault();
+        // Fetch container names initially
+        fetchContainerNames();
 
-                // Get the selected container name and price
-                var containerName = $('select[name="container"]').val();
-                var price = $('input[name="price"]').val();
+        // Handle form submission
+        $("#myForm").submit(function (e) {
+            e.preventDefault();
 
-                // Create a FormData object to handle file uploads
-                var formData = new FormData($(this)[0]);
+            // Get the selected container name and price
+            var containerName = $('select[name="container"]').val();
+            var price = $('input[name="price"]').val();
 
-                formData.append('containerName', containerName);
-                formData.append('price', price);
+            // Create a FormData object to handle file uploads
+            var formData = new FormData($(this)[0]);
 
-                $.ajax({
-                    type: "POST",
-                    url:"https://imagestoreazure.azurewebsites.net/api/uploadImages?containerName=" + containerName + "&price=" + price,
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (response) {
-                        console.log("Files uploaded successfully:", response);
-                        window.alert("Successfully uploaded");
-                    },
-                    error: function (error) {
-                        console.error("Error uploading files:", error);
-                        window.alert("Error uploading files");
-                    }
-                });
-            });
+            formData.append('containerName', containerName);
+            formData.append('price', price);
 
-            document.getElementById("myForm").addEventListener("submit", function () {
-                setTimeout(function () {
-                    document.getElementById("myForm").reset();
-                }, 1000);
+            $.ajax({
+                type: "POST",
+                url: "https://imagestoreazure.azurewebsites.net/api/uploadImages?containerName=" + containerName + "&price=" + price,
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    console.log("Files uploaded successfully:", response);
+                    window.alert("Successfully uploaded");
+                },
+                error: function (error) {
+                    console.error("Error uploading files:", error);
+                    window.alert("Error uploading files");
+                }
             });
         });
-    </script>
+
+        // Reset form after submission
+        document.getElementById("myForm").addEventListener("submit", function () {
+            setTimeout(function () {
+                document.getElementById("myForm").reset();
+            }, 1000);
+        });
+    });
+</script>
+
 </body>
 </html>

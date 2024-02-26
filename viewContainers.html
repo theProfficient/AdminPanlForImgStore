@@ -231,106 +231,110 @@
     <script>
         // Function to fetch and populate container table
         function fetchAndPopulateContainerTable() {
-        $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNames", function (data) {
-            var containerTableBody = $('#containerTableBody');
-            containerTableBody.empty(); // Clear existing rows
-
-            $.each(data, function (index, value) {
-                var row = $('<tr>');
-                row.append($('<th>', { scope: 'row', text: index + 1 }));
-                row.append($('<td>').append(
-                    $('<button>', {
-                        text: 'View',
-                        class: 'btn btn-primary',
-                        click: function () {
-                            fetchAndDisplayImages(value);
-                        }
-                    })
-                ));
-                row.append($('<td>', {
-                    text: value,
-                    click: function () {
-                        fetchAndDisplayImages(value);
-                    }
-                }));
-
-                containerTableBody.append(row);
-            });
-
-            console.log("Containers names fetched:", data);
-        });
-    }
-
-    // Function to fetch and display images for the selected container
-    function fetchAndDisplayImages(containerName) {
-        $.ajax({
-            url: "https://imagestoreazure.azurewebsites.net/getContainersAsPerName?containerName=" + containerName,
-            type: 'GET',
-            success: function (data) {
-                var imageModalBody = $('#imageModalBody');
-                imageModalBody.empty();
-
-                if (data.status === false) {
-                    // If status is false, display prompt message
-                    alert("Images not found");
-                    return;
+            $.get("http://localhost:3001/getAllContainerNamesfromMongo", function (data) {
+                var containerTableBody = $('#containerTableBody');
+                containerTableBody.empty(); // Clear existing rows
+    
+                if (data.containers && Array.isArray(data.containers) && data.containers.length > 0) {
+                    $.each(data.containers, function (index, value) {
+                        var row = $('<tr>');
+                        row.append($('<th>', { scope: 'row', text: index + 1 }));
+                        row.append($('<td>').append(
+                            $('<button>', {
+                                text: 'View',
+                                class: 'btn btn-primary',
+                                click: function () {
+                                    fetchAndDisplayImages(value);
+                                }
+                            })
+                        ));
+                        row.append($('<td>', {
+                            text: value,
+                            click: function () {
+                                fetchAndDisplayImages(value);
+                            }
+                        }));
+    
+                        containerTableBody.append(row);
+                    });
+    
+                    console.log("Containers names fetched:", data);
+                } else {
+                    console.log("No containers found.");
                 }
-
-                $.each(data.images, function (index, imageUrl) {
-                  var img = $('<img>', { src: imageUrl, alt: 'Image' });
-
-                 var deleteIcon = $('<i>', { class: 'fas fa-trash-alt delete-icon', style: 'color: blue;' });
-
-                      // Attach click event handler to delete icon
-                  deleteIcon.click(function () {
-                      // Call the function to delete the image passing the image URL and container name
-                      deleteSingleImage(imageUrl, containerName);
-                        });
-
-                var imgContainer = $('<div class="image-container">').append(deleteIcon, img);
-                  imageModalBody.append(imgContainer);
-                             });
-                // Update modal title
-                $('#imageModalLabel').text("Images for Container - " + containerName);
-
-                // Show the modal
-                $('#imageModal').modal('show');
-
-                // Add event listener to close button
-                $('.modal-header .close').on('click', function () {
-                    // Hide the modal when close button is clicked
-                    $('#imageModal').modal('hide');
-                });
-
-                console.log("Images for container '" + containerName + "' fetched:", data);
-            },
-            error: function (xhr, status, error) {
-                // Display prompt message in case of an error
-                alert("Images not found ");
-            }
-        });
-    }
-
-    function deleteSingleImage(imageUrl, containerName) {
-    // Extract image name from the URL
-    var imageName = imageUrl.split('/').pop();
-
-    $.ajax({
-        url: `https://imagestoreazure.azurewebsites.net/deleteSingleImage?containerName=${containerName}&imageUrl=${imageName}`,
-        type: 'DELETE',
-        success: function (response) {
-            alert("Image deleted successfully");
-            fetchAndDisplayImages(containerName);
-        },
-        error: function (xhr, status, error) {
-            alert("Error deleting image");
+            });
         }
-    });
-}
-
-       // Fetch and populate the container table on page load
-       fetchAndPopulateContainerTable();
-</script>
+    
+        // Function to fetch and display images for the selected container
+        function fetchAndDisplayImages(containerName) {
+            $.ajax({
+                url: "https://imagestoreazure.azurewebsites.net/getContainersAsPerName?containerName=" + containerName,
+                type: 'GET',
+                success: function (data) {
+                    var imageModalBody = $('#imageModalBody');
+                    imageModalBody.empty();
+    
+                    if (data.status === false) {
+                        // If status is false, display prompt message
+                        alert("Images not found");
+                        return;
+                    }
+    
+                    $.each(data.images, function (index, imageUrl) {
+                        var img = $('<img>', { src: imageUrl, alt: 'Image' });
+    
+                        var deleteIcon = $('<i>', { class: 'fas fa-trash-alt delete-icon', style: 'color: blue;' });
+    
+                        // Attach click event handler to delete icon
+                        deleteIcon.click(function () {
+                            // Call the function to delete the image passing the image URL and container name
+                            deleteSingleImage(imageUrl, containerName);
+                        });
+    
+                        var imgContainer = $('<div class="image-container">').append(deleteIcon, img);
+                        imageModalBody.append(imgContainer);
+                    });
+                    // Update modal title
+                    $('#imageModalLabel').text("Images for Container - " + containerName);
+    
+                    // Show the modal
+                    $('#imageModal').modal('show');
+    
+                    // Add event listener to close button
+                    $('.modal-header .close').on('click', function () {
+                        // Hide the modal when close button is clicked
+                        $('#imageModal').modal('hide');
+                    });
+    
+                    console.log("Images for container '" + containerName + "' fetched:", data);
+                },
+                error: function (xhr, status, error) {
+                    // Display prompt message in case of an error
+                    alert("Images not found ");
+                }
+            });
+        }
+    
+        function deleteSingleImage(imageUrl, containerName) {
+            // Extract image name from the URL
+            var imageName = imageUrl.split('/').pop();
+    
+            $.ajax({
+                url: `https://imagestoreazure.azurewebsites.net/deleteSingleImage?containerName=${containerName}&imageUrl=${imageName}`,
+                type: 'DELETE',
+                success: function (response) {
+                    alert("Image deleted successfully");
+                    fetchAndDisplayImages(containerName);
+                },
+                error: function (xhr, status, error) {
+                    alert("Error deleting image");
+                }
+            });
+        }
+    
+        // Fetch and populate the container table on page load
+        fetchAndPopulateContainerTable();
+    </script>
 </body>
 
 </html>
