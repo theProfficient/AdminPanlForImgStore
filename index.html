@@ -241,7 +241,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Fetch data from the API
-            fetch('http://localhost:3001/getAllCategoryAndItsContainer')
+            fetch('https://imagestoreazure.azurewebsites.net/getAllCategoryAndItsContainer')
                 .then(response => response.json())
                 .then(data => {
                     // Check if the API response is successful

@@ -305,7 +305,7 @@
   $(document).ready(function () {
     // Function to fetch and populate container names
     function fetchContainerNames() {
-        $.get("http://localhost:3001/getAllContainerNamesfromMongo", function (data) {
+        $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNamesfromMongo", function (data) {
             var containerSelect = $('select[name="wholeContainer"]');
             console.log(containerSelect, "_________containerSelect");
             containerSelect.empty(); // Clear existing options
@@ -372,7 +372,7 @@
   $(document).ready(function () {
     // Function to fetch and populate container names
     function fetchContainerNames() {
-        $.get("http://localhost:3001/getAllContainerNamesfromMongo", function (data) {
+        $.get("https://imagestoreazure.azurewebsites.net/getAllContainerNamesfromMongo", function (data) {
             var containerSelect = $('select[name="container"]');
             console.log(containerSelect, "_________containerSelect");
             containerSelect.empty(); // Clear existing options
