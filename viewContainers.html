@@ -58,6 +58,29 @@
             background-color: #0a3d62
         }
 
+        .modal-body .image-container {
+        margin-bottom: 20px; /* Add some margin between each image */
+        border: 1px solid #ccc; /* Add a border around each image container */
+        padding: 10px; /* Add padding inside each image container */
+        border-radius: 5px; /* Optional: Add border radius for rounded corners */
+        display: flex; /* Use flexbox to center content vertically and horizontally */
+        align-items: center; /* Center vertically */
+        justify-content: center; /* Center horizontally */
+    }
+
+    .modal-body .image-container img {
+        max-width: 100%; /* Ensure images don't exceed container width */
+        max-height: 100%; /* Ensure images don't exceed container height */
+        height: auto; /* Maintain aspect ratio */
+        display: block; /* Remove any default spacing around the image */
+        margin: auto; /* Center the image both horizontally and vertically */
+    }
+
+    .delete-icon {
+        font-size: 24px; /* Increase the font size of the delete button */
+        cursor: pointer; /* Add cursor pointer for interaction */
+    }
+
     </style>
 </head>
 
